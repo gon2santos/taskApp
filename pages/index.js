@@ -9,27 +9,27 @@ export default function Home() {
         <title>My Tasks App</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <React.StrictMode>
+        <main>
+          <h1 className={styles.title}>
+            Project tasks App
+          </h1>
 
-      <main>
-        <h1 className={styles.title}>
-          Project tasks App
-        </h1>
+          <p className={styles.description}>
+            Start by adding a new project
+          </p>
 
-        <p className={styles.description}>
-          Start by adding a new project
-        </p>
+          <div className={styles.grid}>
+            <Slot linkSrc={"project"} />
 
-        <div className={styles.grid}>
-          <Slot linkSrc={"project"}/>
+            <Slot linkSrc={"project"} />
 
-          <Slot linkSrc={"project"}/>
+            <Slot linkSrc={"project"} />
 
-          <Slot linkSrc={"project"}/>
-
-          <Slot linkSrc={"project"}/>
-        </div>
-      </main>
-
+            <Slot linkSrc={"project"} />
+          </div>
+        </main>
+      </React.StrictMode>
       <footer>
         <a
           href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"

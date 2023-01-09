@@ -7,6 +7,23 @@
   align-items: center;
 }
 
+.addProject {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+  border-radius: 5%;
+  padding: 1rem;
+}
+
+.taskInput {
+  margin-bottom: 1rem;
+  font-size: large;
+}
+
+.inputBox {
+  margin: 0 5px 0 5px;
+}
+
 .title a {
   color: #0070f3;
   text-decoration: none;
