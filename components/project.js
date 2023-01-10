@@ -1,38 +1,49 @@
-import Head from 'next/head';
+import Head from 'next/head'
 import styles from '../styles/Home.module.css';
-import App from '../components/app';
-import { store } from '../redux/store';
-import { Provider } from 'react-redux';
-import React from 'react';
+import Link from 'next/link'
+import { useState } from 'react'; 
+import TaskInput from './taskInput';
+import { useDispatch } from 'react-redux';
+import { addProject, deleteProject, editProject } from '../redux/slice';
 
-export default function Home() {
+export default function Project() {
+
+  const [projectName, setProjectName] = useState('');
+  const [taskName, setTaskName] = useState('');
+  const dispatch = useDispatch();
+
+
   return (
     <div className={styles.container}>
       <Head>
-        <title>My Tasks App</title>
+        <title>New Project</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <React.StrictMode>
-        <Provider store={store}>
-          <main>
-            <App/>
-          </main>
-        </Provider>
-      </React.StrictMode>
-      <footer>
-        <a
-          href="https://github.com/gon2santos"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          by Gonzalo Dos Santos{' '}
-          <img src="/github.svg" alt="Vercel" className={styles.logo} />
-        </a>
-      </footer>
+
+      <main>
+        <h1 className={styles.title}>
+          Add a new project
+        </h1>
+
+        <form>
+          <div className={styles.addProject}>
+            <div className={styles.taskInput}><label htmlFor="projectName">Project name:</label><input className={styles.inputBox} name='projectName' value={projectName} placeholder='Castle drawing' onChange={(e) => setProjectName(e.target.value)}/></div>
+            <TaskInput/>
+            <TaskInput/>
+            <TaskInput/>
+            <input type="button" value="Add task" onClick={() => dispatch(addProject())}/>
+          </div>
+        </form>
+      
+        <Link href={"/"}>
+            <h1>Home &rarr;</h1>
+        </Link>
+
+      </main>
 
       <style jsx>{`
         main {
-          padding: 0rem 0;
+          padding: 5rem 0;
           flex: 1;
           display: flex;
           flex-direction: column;

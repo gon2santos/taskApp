@@ -8,10 +8,7 @@ export default function Slot(props) {
             href={"/" + props.linkSrc}
             className={styles.card}
           >
-            <h3>Empty Slot &rarr;</h3>
-            <p>
-              Click here to add a new project
-            </p>
+            {props.title ? <h3>{props.title} &rarr;</h3> : <><h3>Empty Slot &rarr;</h3> <p>Click here to add a new project</p></>}
             </Link>
         </>
     )
