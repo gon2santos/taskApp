@@ -25,7 +25,7 @@ export default function Project(props) {
       </Head>
 
       <form onSubmit={(e) => HandleSubmit(e)}>
-        <div className={styles.projectName}><label htmlFor="projectName"><h1>Project name:</h1></label><input className={styles.inputBox} name='projectName' value={projectName} placeholder='Castle drawing' onChange={(e) => setProjectName(e.target.value)} /></div>
+        <div className={styles.projectName}><label htmlFor="projectName"><h1>Project name:</h1></label><input autoFocus className={styles.inputBox} name='projectName' value={projectName} placeholder='Castle drawing' onChange={(e) => setProjectName(e.target.value)} /></div>
       </form>
 
       <style jsx>{`

@@ -2,7 +2,8 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
     projNum: 0,
-    projects: []
+    projects: [],
+    taskQueue: []
 }
 
 export const projectSlice = createSlice({
@@ -10,7 +11,7 @@ export const projectSlice = createSlice({
     initialState,
     reducers: {
         addProject: (state, action) => {
-            const newProject = {name: action.payload, tasks: [], id: state.projects.length}
+            const newProject = { name: action.payload, tasks: [], id: state.projects.length }
             state.projects = [...state.projects, newProject]
             state.projNum += 1;
         },
@@ -22,6 +23,20 @@ export const projectSlice = createSlice({
         },
         addTask: (state, action) => {
             state.projects[action.payload.id].tasks.push(action.payload.task);
+            var e = 0;
+            var i = 0;
+            var haveTasksinlevel = true;
+            state.taskQueue = [];
+            while (haveTasksinlevel) {
+                haveTasksinlevel = false;
+                for (i = 0; i < state.projNum; i++) {
+                    if (state.projects[i].tasks[e]) {
+                        state.taskQueue.push({ [i]: e });
+                        haveTasksinlevel = true;
+                    }
+                }
+                e++;
+            }
         },
     },
 })

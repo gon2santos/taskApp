@@ -31,7 +31,7 @@ export default function TaskInput(props) {
                 {projects[props.id].tasks.map(element => <h2><li>{element}</li></h2>)}
             </ol>
             <form onSubmit={(e) => HandleSubmit(e)}>
-                <div className={styles.projectName}><label htmlFor="taskDetail"><h1>New task: </h1></label><input className={styles.inputBox} name='taskDetail' value={taskDetail} placeholder='...' onChange={(e) => setTaskDetail(e.target.value)} /></div>
+                <div className={styles.projectName}><label htmlFor="taskDetail"><h1>New task: </h1></label><input autoFocus className={styles.inputBox} name='taskDetail' value={taskDetail} placeholder='...' onChange={(e) => setTaskDetail(e.target.value)} /></div>
             </form>
 
             <Link href="/"><h1 className={styles.link}>&larr; Back</h1></Link>
