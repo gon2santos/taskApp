@@ -7,6 +7,16 @@
   align-items: center;
 }
 
+.currentTask {
+  display: flex;
+  flex-direction: row;
+}
+
+.checkMark {
+  cursor: pointer;
+  margin-left: 10px;
+}
+
 .projectName {
   display: flex;
   flex-direction: row;

@@ -38,10 +38,30 @@ export const projectSlice = createSlice({
                 e++;
             }
         },
+        checkTask: (state) => {
+            //remover la task del projecto
+            state.projects[Object.keys(state.taskQueue[0])[0]].tasks.shift();
+            //reordenar queue
+            state.taskQueue.shift();
+           /*  var e = 0;
+            var i = 0;
+            var haveTasksinlevel = true;
+            state.taskQueue = [];
+            while (haveTasksinlevel) {
+                haveTasksinlevel = false;
+                for (i = 0; i < state.projNum; i++) {
+                    if (state.projects[i].tasks[e]) {
+                        state.taskQueue.push({ [i]: e });
+                        haveTasksinlevel = true;
+                    }
+                }
+                e++;
+            } */
+        },
     },
 })
 
 // Action creators are generated for each case reducer function
-export const { addProject, deleteProject, editProject, addTask } = projectSlice.actions
+export const { addProject, deleteProject, editProject, addTask, checkTask } = projectSlice.actions
 
 export default projectSlice.reducer
