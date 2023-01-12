@@ -1,10 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-    project1: "",
-    project2: "",
-    project3: "",
-    project4: "",
+    projNum: 0,
+    projects: []
 }
 
 export const projectSlice = createSlice({
@@ -12,7 +10,9 @@ export const projectSlice = createSlice({
     initialState,
     reducers: {
         addProject: (state, action) => {
-            state.project1 = "Castle Drawing";
+            const newProject = {name: action.payload, tasks: [""]}
+            state.projects = [...state.projects, newProject]
+            state.projNum += 1;
         },
         deleteProject: (state, action) => {
             state[action.payload.slot] = "";

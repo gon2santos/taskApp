@@ -1,45 +1,32 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css';
-import Link from 'next/link'
-import { useState } from 'react'; 
-import TaskInput from './taskInput';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addProject, deleteProject, editProject } from '../redux/slice';
+import { addProject } from '../redux/slice';
 
-export default function Project() {
+export default function Project(props) {
 
   const [projectName, setProjectName] = useState('');
-  const [taskName, setTaskName] = useState('');
+
   const dispatch = useDispatch();
+
+  const HandleSubmit = (e) => {
+    e.preventDefault()
+    dispatch(addProject(projectName));
+    props.toggleFunction(false);
+  }
 
 
   return (
-    <div className={styles.container}>
+    <div >
       <Head>
         <title>New Project</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>
-        <h1 className={styles.title}>
-          Add a new project
-        </h1>
-
-        <form>
-          <div className={styles.addProject}>
-            <div className={styles.taskInput}><label htmlFor="projectName">Project name:</label><input className={styles.inputBox} name='projectName' value={projectName} placeholder='Castle drawing' onChange={(e) => setProjectName(e.target.value)}/></div>
-            <TaskInput/>
-            <TaskInput/>
-            <TaskInput/>
-            <input type="button" value="Add task" onClick={() => dispatch(addProject())}/>
-          </div>
-        </form>
-      
-        <Link href={"/"}>
-            <h1>Home &rarr;</h1>
-        </Link>
-
-      </main>
+      <form onSubmit={(e) => HandleSubmit(e)}>
+        <div className={styles.projectName}><label htmlFor="projectName"><h1>Project name:</h1></label><input className={styles.inputBox} name='projectName' value={projectName} placeholder='Castle drawing' onChange={(e) => setProjectName(e.target.value)} /></div>
+      </form>
 
       <style jsx>{`
         main {

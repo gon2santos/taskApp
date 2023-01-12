@@ -7,21 +7,19 @@
   align-items: center;
 }
 
-.addProject {
+.projectName {
   display: flex;
-  flex-direction: column;
-  border: 1px solid black;
-  border-radius: 5%;
-  padding: 1rem;
-}
-
-.taskInput {
-  margin-bottom: 1rem;
-  font-size: large;
+  flex-direction: row;
 }
 
 .inputBox {
-  margin: 0 5px 0 5px;
+  margin-left: 10px;
+  border: none;
+  font-size: xx-large;
+}
+
+.inputBox:focus{
+  outline: none;
 }
 
 .title a {
@@ -33,6 +31,29 @@
 .title a:focus,
 .title a:active {
   text-decoration: underline;
+}
+
+.link {
+  cursor: pointer;
+  color:cornflowerblue;
+}
+
+.link:hover {
+  color:darkblue;
+  transition-duration: 500ms;
+}
+
+.projectBox {
+  cursor: pointer;
+  border: solid black 1px;
+  padding: 0px 10px 0px 10px;
+  margin: 10px 10px 10px 10px;
+  border-radius: 5px;
+}
+
+.projectBox:hover {
+  color:darkgoldenrod;
+  transition-duration: 300ms;
 }
 
 .title {
