@@ -9,7 +9,7 @@ import Link from 'next/link'
 
 export default function App() {
 
-    const { projects, projNum } = useSelector((state) => state.project);
+    const { projects, projNum, taskQueue } = useSelector((state) => state.project);
     const [toggleNewProject, setToggleNewProject] = useState(false);
     const dispatch = useDispatch();
 
@@ -22,7 +22,7 @@ export default function App() {
             <p className={styles.description}>
                 {(projNum === 0) ? <>Start by adding a new project</> : <>Add tasks to your current projects</>}
             </p>
-            {!projects[0]?.tasks[0] ? <></> : <h1>Current task: {projects[0]?.tasks[0]} ✔️</h1>}
+            {taskQueue.length ? <h1>Current task: {projects[Object.keys(taskQueue[0])[0]]?.tasks[taskQueue[0][Object.keys(taskQueue[0])[0]]]} ✔️</h1> : <></> }
             {toggleNewProject ? <><Project toggleFunction={setToggleNewProject} /><h1 className={styles.link} onClick={() => setToggleNewProject(!toggleNewProject)}>&larr; Cancel</h1></> :
                 <div className={styles.grid}>
                     {(projNum === 0) ? <></> : projects.map((element) =>
