@@ -10,7 +10,7 @@ export const projectSlice = createSlice({
     initialState,
     reducers: {
         addProject: (state, action) => {
-            const newProject = {name: action.payload, tasks: [""]}
+            const newProject = {name: action.payload, tasks: [], id: state.projects.length}
             state.projects = [...state.projects, newProject]
             state.projNum += 1;
         },
@@ -20,10 +20,13 @@ export const projectSlice = createSlice({
         editProject: (state, action) => {
             state[action.payload.slot] = action.payload.name;
         },
+        addTask: (state, action) => {
+            state.projects[action.payload.id].tasks.push(action.payload.task);
+        },
     },
 })
 
 // Action creators are generated for each case reducer function
-export const { addProject, deleteProject, editProject } = projectSlice.actions
+export const { addProject, deleteProject, editProject, addTask } = projectSlice.actions
 
 export default projectSlice.reducer

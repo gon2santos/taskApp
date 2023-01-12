@@ -1,35 +1,41 @@
-import Head from 'next/head'
+import Head from 'next/head';
 import styles from '../styles/Home.module.css';
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { addTask } from '../redux/slice';
+import Project from '../components/project';
+import { store } from '../redux/store';
+import { Provider } from 'react-redux';
+import React from 'react';
+import TaskInput from '../components/taskInput';
+import { useRouter } from 'next/router'
 
-export default function TaskInput(props) {
-
-    const dispatch = useDispatch();
-
-    const HandleSubmit = (e) => {
-        e.preventDefault()
-        dispatch(addTask({id: props.id, task: taskDetail}));
-    }
-
-    const [taskDetail, setTaskDetail] = useState("");
-
-
+export default function Tasks() {
+    const router = useRouter()
     return (
-        <div >
+        <div className={styles.container}>
             <Head>
-                <title>New Task</title>
+                <title>Add tasks to project</title>
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-
-            <form onSubmit={(e) => HandleSubmit(e)}>
-                <div className={styles.projectName}><label htmlFor="taskDetail"><h1>Task for project id {props.id} :</h1></label><input className={styles.inputBox} name='taskDetail' value={taskDetail} placeholder='Castle drawing' onChange={(e) => setTaskDetail(e.target.value)} /></div>
-            </form>
+            <React.StrictMode>
+                <Provider store={store}>
+                    <main>
+                        <TaskInput  id={router.query.id}/>
+                    </main>
+                </Provider>
+            </React.StrictMode>
+            <footer>
+                <a
+                    href="https://github.com/gon2santos"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    by Gonzalo Dos Santos{' '}
+                    <img src="/github.svg" alt="Vercel" className={styles.logo} />
+                </a>
+            </footer>
 
             <style jsx>{`
         main {
-          padding: 5rem 0;
+          padding: 0rem 0;
           flex: 1;
           display: flex;
           flex-direction: column;
