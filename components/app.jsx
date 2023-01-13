@@ -26,8 +26,8 @@ export default function App() {
             {toggleNewProject ? <><Project toggleFunction={setToggleNewProject} /><h1 className={styles.link} onClick={() => setToggleNewProject(!toggleNewProject)}>&larr; Cancel</h1></> :
                 <div className={styles.grid}>
                     {(projNum === 0) ? <></> : projects.map((element) =>
-                        <Link href={{ pathname: '/tasks', query: { id: element.id } }} className={styles.projectBox} >
-                            <span key={element.id}><h1>{element.name}</h1></span>
+                        <Link key={element.id} href={{ pathname: '/tasks', query: { id: element.id } }} className={styles.projectBox} >
+                            <span ><h1>{element.name}</h1></span>
                         </Link>
                     )}
                     <span className={styles.link} onClick={() => setToggleNewProject(!toggleNewProject)}><h1>New project +</h1></span>

@@ -18,6 +18,8 @@ export default function TaskInput(props) {
 
     const [taskDetail, setTaskDetail] = useState("");
 
+    let i = 0;
+
 
     return (
         <div >
@@ -26,9 +28,11 @@ export default function TaskInput(props) {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <h1>Tasks for {projects[props.id].name}</h1>
+            <h1>Tasks for {projects[props.id]?.name}</h1>
             <ol>
-                {projects[props.id].tasks.map(element => <h2><li>{element}</li></h2>)}
+                {projects[props.id]?.tasks.map(element => {
+                  i++;
+                  return (<h2 key={i}><li>{element}</li></h2>)})}
             </ol>
             <form onSubmit={(e) => HandleSubmit(e)}>
                 <div className={styles.projectName}><label htmlFor="taskDetail"><h1>New task: </h1></label><input autoFocus className={styles.inputBox} name='taskDetail' value={taskDetail} placeholder='...' onChange={(e) => setTaskDetail(e.target.value)} /></div>

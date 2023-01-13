@@ -28,6 +28,10 @@
   font-size: xx-large;
 }
 
+.deleteButton {
+  color: red;
+}
+
 .inputBox:focus{
   outline: none;
 }

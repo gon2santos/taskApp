@@ -16,10 +16,38 @@ export const projectSlice = createSlice({
             state.projNum += 1;
         },
         deleteProject: (state, action) => {
-            state[action.payload.slot] = "";
+            //state.projects[action.payload.id]
+            var projName = state.projects[action.payload.id].name; 
+            var filtered = state.projects.filter( proj => {
+                if(proj.name === projName) return false;
+                else return true;
+            });
+            var id = 0;
+            filtered = filtered.map( element => {
+                element.id = id;
+                id++;
+                return element;
+            });
+
+            var e = 0;
+            var i = 0;
+            var haveTasksinlevel = true;
+            state.taskQueue = [];
+            while (haveTasksinlevel) {
+                haveTasksinlevel = false;
+                for (i = 0; i < (state.projNum - 1); i++) {
+                    if (filtered[i].tasks[e]) {
+                        state.taskQueue.push({ [i]: e });
+                        haveTasksinlevel = true;
+                    }
+                }
+                e++;
+            }
+            state.projects = filtered;
+            state.projNum -= 1; 
         },
-        editProject: (state, action) => {
-            state[action.payload.slot] = action.payload.name;
+        renameProject: (state, action) => {
+            state.projects[action.payload.id].name = action.payload.name;
         },
         addTask: (state, action) => {
             state.projects[action.payload.id].tasks.push(action.payload.task);
@@ -62,6 +90,6 @@ export const projectSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { addProject, deleteProject, editProject, addTask, checkTask } = projectSlice.actions
+export const { addProject, deleteProject, renameProject, editProject, addTask, checkTask } = projectSlice.actions
 
 export default projectSlice.reducer

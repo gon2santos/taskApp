@@ -5,35 +5,38 @@ import { store } from '../redux/store';
 import { Provider } from 'react-redux';
 import React from 'react';
 import TaskInput from '../components/taskInput';
+import ProjectManager from '../components/projectManager';
 import { useRouter } from 'next/router'
 
 export default function Tasks() {
-    const router = useRouter()
-    return (
-        <div className={styles.container}>
-            <Head>
-                <title>Add tasks to project</title>
-                <link rel="icon" href="/favicon.ico" />
-            </Head>
-            <React.StrictMode>
-                <Provider store={store}>
-                    <main>
-                        <TaskInput  id={router.query.id}/>
-                    </main>
-                </Provider>
-            </React.StrictMode>
-            <footer>
-                <a
-                    href="https://github.com/gon2santos"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    by Gonzalo Dos Santos{' '}
-                    <img src="/github.svg" alt="Vercel" className={styles.logo} />
-                </a>
-            </footer>
+  const router = useRouter()
+  return (
+    <div className={styles.container}>
+      <Head>
+        <title>Add tasks to project</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <React.StrictMode>
+        <Provider store={store}>
+          <main>
+            <h1>Manage project</h1>
+            <ProjectManager id={router.query.id} />
+            <TaskInput id={router.query.id} />
+          </main>
+        </Provider>
+      </React.StrictMode>
+      <footer>
+        <a
+          href="https://github.com/gon2santos"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          by Gonzalo Dos Santos{' '}
+          <img src="/github.svg" alt="Vercel" className={styles.logo} />
+        </a>
+      </footer>
 
-            <style jsx>{`
+      <style jsx>{`
         main {
           padding: 0rem 0;
           flex: 1;
@@ -70,7 +73,7 @@ export default function Tasks() {
         }
       `}</style>
 
-            <style jsx global>{`
+      <style jsx global>{`
         html,
         body {
           padding: 0;
@@ -83,6 +86,6 @@ export default function Tasks() {
           box-sizing: border-box;
         }
       `}</style>
-        </div>
-    )
+    </div>
+  )
 }
