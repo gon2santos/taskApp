@@ -4,11 +4,11 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addTask } from '../redux/slice';
 import Link from 'next/link';
+import { useGetProjectsQuery } from '../redux/apiSlice';
 
 export default function TaskInput(props) {
 
     const dispatch = useDispatch();
-    const { projects } = useSelector((state) => state.project);
 
     const HandleSubmit = (e) => {
         e.preventDefault()
@@ -18,7 +18,9 @@ export default function TaskInput(props) {
 
     const [taskDetail, setTaskDetail] = useState("");
 
-    let i = 0;
+    const { data, error, isLoading } = useGetProjectsQuery();
+
+    let proj = data.find(p => p._id === props.id);
 
 
     return (
@@ -28,11 +30,10 @@ export default function TaskInput(props) {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <h1>Tasks for {projects[props.id]?.name}</h1>
+            <h1>Tasks for {proj.name}</h1>
             <ol>
-                {projects[props.id]?.tasks.map(element => {
-                  i++;
-                  return (<h2 key={i}><li>{element}</li></h2>)})}
+                {proj.tasks.map(element => {
+                  return (<h2 key={element._id}><li>{element.name}</li></h2>)})}
             </ol>
             <form onSubmit={(e) => HandleSubmit(e)}>
                 <div className={styles.projectName}><label htmlFor="taskDetail"><h1>New task: </h1></label><input autoFocus className={styles.inputBox} name='taskDetail' value={taskDetail} placeholder='...' onChange={(e) => setTaskDetail(e.target.value)} /></div>

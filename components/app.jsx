@@ -25,13 +25,15 @@ export default function App() {
             </h1>
 
             <p className={styles.description}>
-                {(projNum === 0) ? <>Start by adding a new project</> : <>Add tasks to your current projects</>}
+                {(data?.length === 0) ? <>Start by adding a new project</> : <>Add tasks to your current projects</>}
             </p>
+            {/* Show current task */}
             {taskQueue.length ? <div className={styles.currentTask}><h1>Current task: {projects[Object.keys(taskQueue[0])[0]]?.tasks[/* taskQueue[0][Object.keys(taskQueue[0])[0]] */0]} </h1> <h1></h1> <h1 className={styles.checkMark} onClick={() => dispatch(checkTask())}>✔️</h1></div> : <></> }
-            {toggleNewProject ? <><Project toggleFunction={setToggleNewProject} /><h1 className={styles.link} onClick={() => setToggleNewProject(!toggleNewProject)}>&larr; Cancel</h1></> :
-                <div className={styles.grid}>
-                    {(projNum === 0) ? <></> : projects.map((element) =>
-                        <Link key={element.id} href={{ pathname: '/tasks', query: { id: element.id } }} className={styles.projectBox} >
+            
+            {toggleNewProject ? <><Project toggleFunction={setToggleNewProject} /><h1 className={styles.link} onClick={() => setToggleNewProject(!toggleNewProject)}>&larr; Cancel</h1></> 
+            : <div className={styles.grid}>
+                    {(data?.length === 0) ? <></> : data?.map((element) =>
+                        <Link key={element._id} href={{ pathname: '/tasks', query: { id: element._id } }} className={styles.projectBox} >
                             <span ><h1>{element.name}</h1></span>
                         </Link>
                     )}
