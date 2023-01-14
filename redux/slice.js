@@ -16,14 +16,13 @@ export const projectSlice = createSlice({
             state.projNum += 1;
         },
         deleteProject: (state, action) => {
-            //state.projects[action.payload.id]
-            var projName = state.projects[action.payload.id].name; 
-            var filtered = state.projects.filter( proj => {
-                if(proj.name === projName) return false;
+            var projName = state.projects[action.payload.id].name;
+            var filtered = state.projects.filter(proj => {
+                if (proj.name === projName) return false;
                 else return true;
             });
             var id = 0;
-            filtered = filtered.map( element => {
+            filtered = filtered.map(element => {
                 element.id = id;
                 id++;
                 return element;
@@ -44,7 +43,7 @@ export const projectSlice = createSlice({
                 e++;
             }
             state.projects = filtered;
-            state.projNum -= 1; 
+            state.projNum -= 1;
         },
         renameProject: (state, action) => {
             state.projects[action.payload.id].name = action.payload.name;
@@ -67,24 +66,8 @@ export const projectSlice = createSlice({
             }
         },
         checkTask: (state) => {
-            //remover la task del projecto
             state.projects[Object.keys(state.taskQueue[0])[0]].tasks.shift();
-            //reordenar queue
             state.taskQueue.shift();
-           /*  var e = 0;
-            var i = 0;
-            var haveTasksinlevel = true;
-            state.taskQueue = [];
-            while (haveTasksinlevel) {
-                haveTasksinlevel = false;
-                for (i = 0; i < state.projNum; i++) {
-                    if (state.projects[i].tasks[e]) {
-                        state.taskQueue.push({ [i]: e });
-                        haveTasksinlevel = true;
-                    }
-                }
-                e++;
-            } */
         },
     },
 })

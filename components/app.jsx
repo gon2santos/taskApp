@@ -5,6 +5,7 @@ import { useState } from 'react';
 import Project from './project';
 import { checkTask } from '../redux/slice';
 import Link from 'next/link'
+import { useGetProjectsQuery } from '../redux/apiSlice';
 
 
 export default function App() {
@@ -12,6 +13,10 @@ export default function App() {
     const { projects, projNum, taskQueue } = useSelector((state) => state.project);
     const [toggleNewProject, setToggleNewProject] = useState(false);
     const dispatch = useDispatch();
+
+    const { data, error, isLoading } = useGetProjectsQuery();
+
+
 
     return (
         <div>
