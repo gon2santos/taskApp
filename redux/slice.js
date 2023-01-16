@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
     projNum: 0,
     projects: [],
-    taskQueue: []
+    taskQueue: [],
 }
 
 export const projectSlice = createSlice({
@@ -68,7 +68,7 @@ export const projectSlice = createSlice({
         checkTask: (state) => {
             state.projects[Object.keys(state.taskQueue[0])[0]].tasks.shift();
             state.taskQueue.shift();
-        },
+        }
     },
 })
 

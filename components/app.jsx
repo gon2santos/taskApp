@@ -5,17 +5,16 @@ import { useState } from 'react';
 import Project from './project';
 import { checkTask } from '../redux/slice';
 import Link from 'next/link'
-import { useGetProjectsQuery } from '../redux/apiSlice';
+import { useGetProjectsQuery, useGetTasksQueueQuery } from '../redux/apiSlice';
 
 
 export default function App() {
 
-    const { projects, projNum, taskQueue } = useSelector((state) => state.project);
     const [toggleNewProject, setToggleNewProject] = useState(false);
     const dispatch = useDispatch();
 
-    const { data, error, isLoading } = useGetProjectsQuery();
-
+    const projectsQuery = useGetProjectsQuery();
+    const queueQuery = useGetTasksQueueQuery();
 
 
     return (
@@ -25,14 +24,14 @@ export default function App() {
             </h1>
 
             <p className={styles.description}>
-                {(data?.length === 0) ? <>Start by adding a new project</> : <>Add tasks to your current projects</>}
+                {projectsQuery.isSuccess ? <>Start by adding a new project</> : <>Add tasks to your current projects</>}
             </p>
             {/* Show current task */}
-            {taskQueue.length ? <div className={styles.currentTask}><h1>Current task: {projects[Object.keys(taskQueue[0])[0]]?.tasks[/* taskQueue[0][Object.keys(taskQueue[0])[0]] */0]} </h1> <h1></h1> <h1 className={styles.checkMark} onClick={() => dispatch(checkTask())}>✔️</h1></div> : <></> }
+            {queueQuery.isSuccess ? <div className={styles.currentTask}><h1>Current task: {queueQuery.data[0].name} </h1> <h1 className={styles.checkMark} onClick={() => dispatch(checkTask())}>✔️</h1></div> : <></>}
             
             {toggleNewProject ? <><Project toggleFunction={setToggleNewProject} /><h1 className={styles.link} onClick={() => setToggleNewProject(!toggleNewProject)}>&larr; Cancel</h1></> 
             : <div className={styles.grid}>
-                    {(data?.length === 0) ? <></> : data?.map((element) =>
+                    {!projectsQuery.isSuccess ? <></> : projectsQuery?.data.map((element) =>
                         <Link key={element._id} href={{ pathname: '/tasks', query: { id: element._id } }} className={styles.projectBox} >
                             <span ><h1>{element.name}</h1></span>
                         </Link>
