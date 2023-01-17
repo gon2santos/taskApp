@@ -19,12 +19,12 @@ export default function App() {
 
     const HandleCheckTask = function () {
         //{ "projectId": queueQuery.data[0].proj_id, "taskId": queueQuery.data[0]._id }
-        let taskData = { "projectId": queueQuery.data[0].proj_id, "taskId": queueQuery.data[0]._id }
+        let taskData = { "projectId": queueQuery.data[0].proj_id, "taskId": queueQuery.data[0]._id, "projQtty": projectsQuery?.data.length }
         deleteTasks(taskData)
             .unwrap()
             .then(() => { })
             .then((error) => {
-                console.log(error)
+                console.log("HandleCheckTask error: " + error)
             })
     }
 
