@@ -7,19 +7,33 @@ export const apiSlice = createApi({
   reducerPath: 'api',
   // All of our requests will have URLs starting with 'http://127.0.0.1:5000'
   baseQuery: fetchBaseQuery({ baseUrl: 'http://127.0.0.1:5000' }),
+  tagTypes: ['Projects', 'Tasks'],
   // The "endpoints" represent operations and requests for this server
   endpoints: builder => ({
     // The `getPosts` endpoint is a "query" operation that returns data
     getProjects: builder.query({
       // The URL for the request is 'http://127.0.0.1:5000/projects/all'
-      query: () => '/projects/all'
+      query: () => '/projects/all',
+      providesTags: ['Projects']
     }),
     getTasksQueue: builder.query({
       // The URL for the request is 'http://127.0.0.1:5000/queue/'
-      query: () => '/queue/'
+      query: () => '/queue/',
+      providesTags: ['Tasks']
     }),
+    deleteTasks: builder.mutation({
+      query: (payload) => ({
+        url: '/tasks/check/',
+        method: 'DELETE',
+        body: payload,
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+      }),
+      invalidatesTags: ['Projects','Tasks'],
+    })
   })
 })
 
 // Export the auto-generated hook for the `getPosts` query endpoint
-export const { useGetProjectsQuery, useGetTasksQueueQuery } = apiSlice
+export const { useGetProjectsQuery, useGetTasksQueueQuery, useDeleteTasksMutation } = apiSlice
