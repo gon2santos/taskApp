@@ -1,11 +1,10 @@
 import styles from '../styles/Home.module.css';
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 import Project from './project';
-import { checkTask } from '../redux/slice';
 import Link from 'next/link'
-import { useGetProjectsQuery, useGetTasksQueueQuery, useDeleteTasksMutation } from '../redux/apiSlice';
+import { useGetProjectsQuery, useGetTasksQueueQuery, useDeleteTasksMutation, useSetCurrProjMutation } from '../redux/apiSlice';
 
 
 export default function App() {
@@ -15,14 +14,22 @@ export default function App() {
 
     const projectsQuery = useGetProjectsQuery();
     const queueQuery = useGetTasksQueueQuery();
-    const [deleteTasks, response] = useDeleteTasksMutation()
+    const [deleteTasks, response_delete] = useDeleteTasksMutation()
+    const [setCurrProj, response_currProj] = useSetCurrProjMutation()
 
     const HandleCheckTask = function () {
-        //{ "projectId": queueQuery.data[0].proj_id, "taskId": queueQuery.data[0]._id }
         let taskData = { "projectId": queueQuery.data[0].proj_id, "taskId": queueQuery.data[0]._id, "projQtty": projectsQuery?.data.length }
         deleteTasks(taskData)
             .unwrap()
-            .then(() => { })
+            .then(() => {
+                if(queueQuery.data.length === 0){
+                    console.log("Resetting current project counter");
+                    let currProjData = { "num": 0 }
+                    setCurrProj(currProjData).then(() => {}).catch((error) => {
+                        console.log("HandleCheckTask.setCurrProj error: " + error)
+                    })
+                }
+            })
             .catch((error) => {
                 console.log("HandleCheckTask error: " + error)
             })
