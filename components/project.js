@@ -1,18 +1,22 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { addProject } from '../redux/slice';
+import { useCreateProjectMutation } from '../redux/apiSlice';
 
 export default function Project(props) {
 
   const [projectName, setProjectName] = useState('');
+  const [createProject, response] = useCreateProjectMutation();
 
-  const dispatch = useDispatch();
-
-  const HandleSubmit = (e) => {
+  const HandleCreateProject = (e) => {
     e.preventDefault()
-    dispatch(addProject(projectName));
+    let projectData = { "name": projectName };
+    createProject(projectData)
+            .unwrap()
+            .then(() => { })
+            .catch((error) => {
+                console.log("HandleCreateProject error: " + error)
+            })
     props.toggleFunction(false);
   }
 
@@ -24,7 +28,7 @@ export default function Project(props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <form onSubmit={(e) => HandleSubmit(e)}>
+      <form onSubmit={(e) => HandleCreateProject(e)}>
         <div className={styles.projectName}><label htmlFor="projectName"><h1>Project name:</h1></label><input autoFocus className={styles.inputBox} name='projectName' value={projectName} placeholder='Castle drawing' onChange={(e) => setProjectName(e.target.value)} /></div>
       </form>
 
