@@ -23,7 +23,7 @@ export default function App() {
         deleteTasks(taskData)
             .unwrap()
             .then(() => { })
-            .then((error) => {
+            .catch((error) => {
                 console.log("HandleCheckTask error: " + error)
             })
     }
@@ -36,7 +36,7 @@ export default function App() {
             </h1>
 
             <p className={styles.description}>
-                {(projectsQuery.isSuccess && !projectsQuery.data?.length) ? <>Start by adding a new project</> : <>{queueQuery?.data?.length ? <></> : <>Add tasks to your current projects</>}</>}
+                {(projectsQuery.isSuccess && !projectsQuery.data?.length) ? <>Start by adding a new project</> : <>{queueQuery?.data?.length ? <></> : <>Add tasks to your projects</>}</>}
             </p>
             {/* Show current task */}
             {(queueQuery.isSuccess && queueQuery.data.length) ? <div className={styles.currentTask}><h1>Current task: {queueQuery.data[0]?.name} </h1> <h1 className={styles.checkMark} onClick={() => HandleCheckTask()}>✔️</h1></div> : <></>}

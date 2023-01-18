@@ -1,18 +1,22 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css';
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { addTask } from '../redux/slice';
 import Link from 'next/link';
-import { useGetProjectsQuery } from '../redux/apiSlice';
+import { useGetProjectsQuery, useCreateTaskMutation } from '../redux/apiSlice';
 
 export default function TaskInput(props) {
 
-    const dispatch = useDispatch();
+    const [createTask, response] = useCreateTaskMutation();
 
-    const HandleSubmit = (e) => {
-        e.preventDefault()
-        dispatch(addTask({id: props.id, task: taskDetail}));
+    const HandleCreateTask = (e) => {
+        e.preventDefault();
+        let taskData = { "name": taskDetail, "projectId": props.id };
+        createTask(taskData)
+            .unwrap()
+            .then(() => { })
+            .catch((error) => {
+                console.log("HandleCreateTask error: " + error)
+            })
         setTaskDetail("");
     }
 
@@ -35,7 +39,7 @@ export default function TaskInput(props) {
                 {proj.tasks.map(element => {
                   return (<h2 key={element._id}><li>{element.name}</li></h2>)})}
             </ol>
-            <form onSubmit={(e) => HandleSubmit(e)}>
+            <form onSubmit={(e) => HandleCreateTask(e)}>
                 <div className={styles.projectName}><label htmlFor="taskDetail"><h1>New task: </h1></label><input autoFocus className={styles.inputBox} name='taskDetail' value={taskDetail} placeholder='...' onChange={(e) => setTaskDetail(e.target.value)} /></div>
             </form>
 
