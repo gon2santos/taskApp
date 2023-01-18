@@ -3,14 +3,22 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteProject, renameProject } from '../redux/slice';
 import { useRouter } from 'next/router'
+import { useDeleteProjectMutation } from '../redux/apiSlice';
 
 export default function ProjectManager(props) {
     const dispatch = useDispatch();
-    const [rename, setRename] = useState("");
+    const [rename, setRename] = useState("")
     const router = useRouter()
+    const [deleteProject, response] = useDeleteProjectMutation()
 
-    const HandleDelete = () => {
-        dispatch(deleteProject({id: props.id}));
+    const HandleDeleteProject = () => {
+        let projectData = { "projectId": props.id }
+        deleteProject(projectData)
+            .unwrap()
+            .then(() => { })
+            .catch((error) => {
+                console.log("HandleDeleteProject error: " + error)
+            })
         router.push('/');
     }
 
@@ -21,7 +29,7 @@ export default function ProjectManager(props) {
     return (
         <div>
             <div className={styles.projectName}><label htmlFor='rename'>New project name: </label> <input name='rename' onChange={(e) => setRename(e.target.value)} /> <button onClick={() => HandleRename()}>Rename this project</button></div>
-            <button className={styles.deleteButton} onClick={() => HandleDelete()}>Delete this project</button>
+            <button className={styles.deleteButton} onClick={() => HandleDeleteProject()}>Delete this project</button>
         </div>
     )
 }

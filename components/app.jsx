@@ -36,10 +36,10 @@ export default function App() {
             </h1>
 
             <p className={styles.description}>
-                {projectsQuery.isSuccess ? <>Start by adding a new project</> : <>Add tasks to your current projects</>}
+                {(projectsQuery.isSuccess && !projectsQuery.data?.length) ? <>Start by adding a new project</> : <>{queueQuery?.data?.length ? <></> : <>Add tasks to your current projects</>}</>}
             </p>
             {/* Show current task */}
-            {queueQuery.isSuccess ? <div className={styles.currentTask}><h1>Current task: {queueQuery.data[0].name} </h1> <h1 className={styles.checkMark} onClick={() => HandleCheckTask()}>✔️</h1></div> : <></>}
+            {(queueQuery.isSuccess && queueQuery.data.length) ? <div className={styles.currentTask}><h1>Current task: {queueQuery.data[0]?.name} </h1> <h1 className={styles.checkMark} onClick={() => HandleCheckTask()}>✔️</h1></div> : <></>}
 
             {toggleNewProject ? <><Project toggleFunction={setToggleNewProject} /><h1 className={styles.link} onClick={() => setToggleNewProject(!toggleNewProject)}>&larr; Cancel</h1></>
                 : <div className={styles.grid}>
