@@ -25,7 +25,7 @@ export default function TaskInput(props) {
 
     const { data, error, isLoading } = useGetProjectsQuery();
 
-    let proj = data.find(p => p._id === props.id);
+    let proj = data?.find(p => p._id === props.id);
 
 
     return (
