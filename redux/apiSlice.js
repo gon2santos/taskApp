@@ -6,7 +6,7 @@ export const apiSlice = createApi({
   // The cache reducer expects to be added at `state.api` (already default - this is optional)
   reducerPath: 'api',
   // All of our requests will have URLs starting with 'http://127.0.0.1:5000'
-  baseQuery: fetchBaseQuery({ baseUrl: 'http://127.0.0.1:5000' }),
+  baseQuery: fetchBaseQuery({ baseUrl: 'https://task-app-backend-sable.vercel.app' }),
   tagTypes: ['Projects', 'Tasks'],
   // The "endpoints" represent operations and requests for this server
   endpoints: builder => ({
