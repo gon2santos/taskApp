@@ -36,11 +36,11 @@ export default function TaskInput(props) {
             </Head>
 
             <h1 className={styles.title}>
-            {proj.name}
+            {proj?.name}
             </h1>
             
             <ol>
-                {proj.tasks.map(element => {
+                {proj?.tasks.map(element => {
                   return (<span key={element._id}><li><Task name={element.name} id={element._id} projId={props.id}/></li></span>)})}
             </ol>
             <form onSubmit={(e) => HandleCreateTask(e)}>
