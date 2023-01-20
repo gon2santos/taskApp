@@ -7,7 +7,7 @@ import React from 'react';
 
 export default function Home() {
   return (
-    <div className={styles.container}>
+    <div className={styles.containerDark}>
       <Head>
         <title>Create a new project</title>
         <link rel="icon" href="/favicon.ico" />

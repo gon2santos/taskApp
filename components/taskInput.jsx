@@ -3,6 +3,7 @@ import styles from '../styles/Home.module.css';
 import { useState } from 'react';
 import Link from 'next/link';
 import { useGetProjectsQuery, useCreateTaskMutation } from '../redux/apiSlice';
+import Task from './task';
 
 export default function TaskInput(props) {
 
@@ -34,16 +35,20 @@ export default function TaskInput(props) {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <h1>Tasks for {proj.name}</h1>
-            <ol>
+            <h1>{proj.name}</h1>
+            {/* <ol>
                 {proj.tasks.map(element => {
                   return (<h2 key={element._id}><li>{element.name}</li></h2>)})}
+            </ol> */}
+            <ol>
+                {proj.tasks.map(element => {
+                  return (<span key={element._id}><li><Task name={element.name} id={element._id} projId={props.id}/></li></span>)})}
             </ol>
             <form onSubmit={(e) => HandleCreateTask(e)}>
                 <div className={styles.projectName}><label htmlFor="taskDetail"><h1>New task: </h1></label><input autoFocus className={styles.inputBox} name='taskDetail' value={taskDetail} placeholder='...' onChange={(e) => setTaskDetail(e.target.value)} /></div>
             </form>
 
-            <Link href="/"><h1 className={styles.link}>&larr; Back</h1></Link>
+            <Link className={styles.link} href="/"><h1 >&larr; Back</h1></Link>
 
             <style jsx>{`
         main {

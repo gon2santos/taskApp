@@ -87,8 +87,30 @@ export const apiSlice = createApi({
       }),
       invalidatesTags: ['Projects' ,'Tasks' ],
     }),
+    renameTask: builder.mutation({
+      query: (payload) => ({
+        url: '/tasks/rename/',
+        method: 'PUT',
+        body: payload,
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+      }),
+      invalidatesTags: ['Projects' ,'Tasks' ],
+    }),
+    deleteTask: builder.mutation({
+      query: (payload) => ({
+        url: '/tasks/delete/',
+        method: 'DELETE',
+        body: payload,
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+      }),
+      invalidatesTags: ['Projects' ,'Tasks' ],
+    }),
   })
 })
 
 // Export the auto-generated hook for the `getPosts` query endpoint
-export const { useGetProjectsQuery, useGetTasksQueueQuery, useDeleteTasksMutation, useCreateTaskMutation, useCreateProjectMutation, useDeleteProjectMutation, useRenameProjectMutation, useSetCurrProjMutation } = apiSlice
+export const { useGetProjectsQuery, useGetTasksQueueQuery, useDeleteTasksMutation, useCreateTaskMutation, useCreateProjectMutation, useDeleteProjectMutation, useRenameProjectMutation, useSetCurrProjMutation, useRenameTaskMutation, useDeleteTaskMutation } = apiSlice

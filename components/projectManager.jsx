@@ -31,13 +31,13 @@ export default function ProjectManager(props) {
             .catch((error) => {
                 console.log("HandleRenameProject error: " + error)
             })
-            setRename("")
+        setRename("")
     }
 
     return (
-        <div>
-            <div className={styles.projectName}><label htmlFor='rename'>New project name: </label> <input name='rename' value={rename} onChange={(e) => setRename(e.target.value)} /> <button onClick={(e) => HandleRenameProject(e)}>Rename this project</button></div>
-            <button className={styles.deleteButton} onClick={() => HandleDeleteProject()}>Delete this project</button>
-        </div>
+            <div className={styles.projMan}>
+                <div><label htmlFor='rename'>Rename Project: </label> <input className={styles.projManRenameInput} name='rename' value={rename} onChange={(e) => setRename(e.target.value)} /> <button onClick={(e) => HandleRenameProject(e)}>Done</button></div>
+                <button className={styles.deleteButton} onClick={() => HandleDeleteProject()}>Delete project</button>
+            </div>
     )
 }

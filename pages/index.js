@@ -3,17 +3,19 @@ import styles from '../styles/Home.module.css';
 import App from '../components/app';
 import { store } from '../redux/store';
 import { Provider } from 'react-redux';
-import React from 'react';
+import React, { useState } from 'react';
 
 export default function Home() {
+  const [darkTheme, setDarkTheme] = useState(true);
   return (
-    <div className={styles.container}>
+    <div className={darkTheme ? styles.containerDark : styles.containerLight}>
       <Head>
-        <title>My Tasks App</title>
+        <title>Project Tasks App</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <React.StrictMode>
         <Provider store={store}>
+          {/* <button className={styles.buttonDarkTheme} onClick={() => setDarkTheme(!darkTheme)}>Toggle Dark Theme</button> */}
           <main>
             <App/>
           </main>
@@ -24,6 +26,7 @@ export default function Home() {
           href="https://github.com/gon2santos"
           target="_blank"
           rel="noopener noreferrer"
+          className={styles.footerName}
         >
           by Gonzalo Dos Santos{' '}
           <img src="/github.svg" alt="Vercel" className={styles.logo} />

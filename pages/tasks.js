@@ -3,15 +3,18 @@ import styles from '../styles/Home.module.css';
 import Project from '../components/project';
 import { store } from '../redux/store';
 import { Provider } from 'react-redux';
-import React from 'react';
+import React, { useState } from 'react';
 import TaskInput from '../components/taskInput';
 import ProjectManager from '../components/projectManager';
 import { useRouter } from 'next/router'
 
 export default function Tasks() {
   const router = useRouter()
+
+  const [showProjMan, setShowProjMan] = useState(false);
+
   return (
-    <div className={styles.container}>
+    <div className={styles.containerDark}>
       <Head>
         <title>Add tasks to project</title>
         <link rel="icon" href="/favicon.ico" />
@@ -19,8 +22,10 @@ export default function Tasks() {
       <React.StrictMode>
         <Provider store={store}>
           <main>
-            <h1>Manage project</h1>
-            <ProjectManager id={router.query.id} />
+            <div className={styles.projManSelection}>
+              {<button className={styles.projManSelectionButton} onClick={() => setShowProjMan(!showProjMan)}><h1>...</h1></button>}
+              {showProjMan ? <ProjectManager id={router.query.id} /> : <></>}
+            </div>
             <TaskInput id={router.query.id} />
           </main>
         </Provider>
