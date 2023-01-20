@@ -1,6 +1,7 @@
 import styles from '../styles/Home.module.css';
 import { useRenameTaskMutation, useDeleteTaskMutation } from '../redux/apiSlice';
 import { useState } from 'react';
+import Image from 'next/image';
 
 export default function Task(props) {
 
@@ -33,13 +34,29 @@ export default function Task(props) {
   }
 
   return (
-    <div className={styles.tasks}>
-      <div>
+    <div >
+      <div className={styles.tasks}>
         {toggleRenameInput ?
           <form onSubmit={(e) => HandleRenameTask(e)}>
-            <input autoFocus name='taskName' value={rename} /* placeholder='...' */ onChange={(e) => setRename(e.target.value)} />
+            <input className={styles.taskRenameInput} autoFocus name='taskName' value={rename} placeholder={props.name} onChange={(e) => setRename(e.target.value)} />
           </form>
-          : <span>{props.name}</span>} <button onClick={() => setToggleRenameInput(!toggleRenameInput)}>Rename</button><button onClick={() => HandleDeleteTask()}>delete</button>
+          : <span>{props.name}</span>}
+          <div>
+        <button className={styles.taskButtons} onClick={() => setToggleRenameInput(!toggleRenameInput)}><Image
+          priority
+          src="/editButton.svg"
+          height={25}
+          width={25}
+          alt=""
+        /></button>
+        <button className={styles.taskButtons} onClick={() => HandleDeleteTask()}><Image
+          priority
+          src="/deleteButton.svg"
+          height={25}
+          width={25}
+          alt=""
+        /></button>
+        </div>
       </div>
 
       <style jsx>{`

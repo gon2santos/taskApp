@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Project from './project';
 import Link from 'next/link'
 import { useGetProjectsQuery, useGetTasksQueueQuery, useDeleteTasksMutation, useSetCurrProjMutation } from '../redux/apiSlice';
-
+import Image from 'next/image';
 
 export default function App() {
 
@@ -35,14 +35,21 @@ export default function App() {
             })
     }
 
-    var i = Math.floor(Math.random() * projectBoxStyles.length)
+    var i = 0/* Math.floor(Math.random() * projectBoxStyles.length) */
 
 
     return (
         <div>
-            <h1 className={styles.title}>
-                Project tasks App
-            </h1>
+            <div className={styles.mainTitleContainer}>
+            <Image
+                priority
+                src="/octodo_logo.png"
+                height={180}
+                width={458}
+                alt=""
+            />
+            </div>
+
 
             <p className={styles.description}>
                 {(projectsQuery.isSuccess && !projectsQuery.data?.length) ?
@@ -64,17 +71,18 @@ export default function App() {
                 }
             </div>
 
-            {toggleNewProject ? <></> : <span className={styles.projectsSeparator}>My Projects</span>}
+            <span className={styles.projectsSeparator}>My Projects</span>
 
 
             {toggleNewProject ? <><Project toggleFunction={setToggleNewProject} /><h1 className={styles.link} onClick={() => setToggleNewProject(!toggleNewProject)}>&larr; Cancel</h1></>
                 : <div className={styles.grid}>
-                    {!projectsQuery.isSuccess ? <></> : projectsQuery?.data.map((element) =>{
-                        if(i < projectBoxStyles.length - 1) i = i + 1;
+                    {!projectsQuery.isSuccess ? <></> : projectsQuery?.data.map((element) => {
+                        if (i < projectBoxStyles.length - 1) i = i + 1;
                         else i = 0;
                         return (<Link key={element._id} href={{ pathname: '/tasks', query: { id: element._id } }} className={projectBoxStyles[i]} >
                             <span>{element.name}</span>
-                        </Link>)}
+                        </Link>)
+                    }
                     )}
                     <p className={styles.linkProject} onClick={() => setToggleNewProject(!toggleNewProject)}>New project +</p>
                 </div>}

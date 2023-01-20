@@ -35,17 +35,16 @@ export default function TaskInput(props) {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <h1>{proj.name}</h1>
-            {/* <ol>
-                {proj.tasks.map(element => {
-                  return (<h2 key={element._id}><li>{element.name}</li></h2>)})}
-            </ol> */}
+            <h1 className={styles.title}>
+            {proj.name}
+            </h1>
+            
             <ol>
                 {proj.tasks.map(element => {
                   return (<span key={element._id}><li><Task name={element.name} id={element._id} projId={props.id}/></li></span>)})}
             </ol>
             <form onSubmit={(e) => HandleCreateTask(e)}>
-                <div className={styles.projectName}><label htmlFor="taskDetail"><h1>New task: </h1></label><input autoFocus className={styles.inputBox} name='taskDetail' value={taskDetail} placeholder='...' onChange={(e) => setTaskDetail(e.target.value)} /></div>
+                <div className={styles.newTaskInput}><label htmlFor="taskDetail"><span>New task: </span></label><input autoFocus className={styles.inputBox} name='taskDetail' value={taskDetail} placeholder='...' onChange={(e) => setTaskDetail(e.target.value)} /></div>
             </form>
 
             <Link className={styles.link} href="/"><h1 >&larr; Back</h1></Link>

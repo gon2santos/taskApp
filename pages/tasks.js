@@ -7,11 +7,13 @@ import React, { useState } from 'react';
 import TaskInput from '../components/taskInput';
 import ProjectManager from '../components/projectManager';
 import { useRouter } from 'next/router'
+import Image from 'next/image';
 
 export default function Tasks() {
   const router = useRouter()
 
   const [showProjMan, setShowProjMan] = useState(false);
+  const [rotOptBtn, setRotOptBtn] = useState(false);
 
   return (
     <div className={styles.containerDark}>
@@ -23,7 +25,15 @@ export default function Tasks() {
         <Provider store={store}>
           <main>
             <div className={styles.projManSelection}>
-              {<button className={styles.projManSelectionButton} onClick={() => setShowProjMan(!showProjMan)}><h1>...</h1></button>}
+              {<div className={!rotOptBtn ? styles.projManSelectionButton : styles.projManSelectionButtonSelected} onClick={() => {setShowProjMan(!showProjMan); setRotOptBtn(!rotOptBtn);}}>
+                <Image
+                  priority
+                  src="/optionsButton.svg"
+                  height={40}
+                  width={40}
+                  alt=""
+                />
+              </div>}
               {showProjMan ? <ProjectManager id={router.query.id} /> : <></>}
             </div>
             <TaskInput id={router.query.id} />

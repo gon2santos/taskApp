@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <div className={darkTheme ? styles.containerDark : styles.containerLight}>
       <Head>
-        <title>Project Tasks App</title>
+        <title>OcToDo: Project Organizer</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <React.StrictMode>

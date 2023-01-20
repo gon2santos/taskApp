@@ -22,16 +22,14 @@ export default function Project(props) {
 
 
   return (
-    <div >
+    <div>
       <Head>
         <title>New Project</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
       <form onSubmit={(e) => HandleCreateProject(e)}>
-        <div className={styles.projectName}><label htmlFor="projectName"><h1>Project name:</h1></label><input autoFocus className={styles.inputBox} name='projectName' value={projectName} placeholder='Castle drawing' onChange={(e) => setProjectName(e.target.value)} /></div>
+        <div className={styles.projectName}><label htmlFor="projectName"><h1>Project name:</h1></label><input autoFocus className={styles.inputBox} name='projectName' value={projectName} placeholder='...' onChange={(e) => setProjectName(e.target.value)} /></div>
       </form>
-
       <style jsx>{`
         main {
           padding: 5rem 0;
