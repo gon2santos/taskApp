@@ -3,6 +3,8 @@
 
 <h3 align="center">Oc To Do: A projects organizing tool.</h3>
 
+<h3 align="center"><a href="https://octodo.vercel.app/">🔗 octodo.vercel.app</a></h3>
+
 ## Features:
 
 <p>Oc To Do is a full stack web application that lets the user save projects and those project's tasks. 
