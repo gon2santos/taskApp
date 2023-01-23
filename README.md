@@ -17,3 +17,5 @@ The app will then show one task from each project at a time, letting the user wo
 
 ![octodo](https://github.com/gon2santos/gon2santos/blob/main/assets/octodoScreen2.png)
 
+![octodo](https://github.com/gon2santos/gon2santos/blob/main/assets/octodo_screen3.png)
+
