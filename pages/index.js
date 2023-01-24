@@ -3,11 +3,22 @@ import styles from '../styles/Home.module.css';
 import App from '../components/app';
 import { store } from '../redux/store';
 import { Provider } from 'react-redux';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Logout from '../components/logout';
+import { useRouter } from 'next/router';
 
 export default function Home() {
   const [darkTheme, setDarkTheme] = useState(true);
+
+  const router = useRouter()
+
+  useEffect(() => {
+    if (!localStorage.getItem("accessToken"))
+      router.push('/login');
+    else if (!localStorage.getItem("userEmail"))
+      router.push('/login');
+  }, []);
+
   return (
     <div className={darkTheme ? styles.containerDark : styles.containerLight}>
       <Head>
@@ -18,7 +29,7 @@ export default function Home() {
         <Provider store={store}>
           <Logout />
           <main>
-            <App/>
+            <App />
           </main>
         </Provider>
       </React.StrictMode>
