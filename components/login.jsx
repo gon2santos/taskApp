@@ -1,7 +1,7 @@
 import styles from '../styles/Home.module.css';
 import React from 'react';
 import { useState } from 'react';
-import { useLoginUserMutation, useCreateUserMutation } from '../redux/apiSlice';
+import { useLoginUserMutation, useCreateUserMutation, useCreateCurrProjMutation } from '../redux/apiSlice';
 import Image from 'next/image';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router'
@@ -14,6 +14,7 @@ export default function Login() {
     const [toggleCreate, setToggleCreate] = useState(false);
     const [login, response_login] = useLoginUserMutation();
     const [create, response_create] = useCreateUserMutation();
+    const [createCurrPrj, response_createCurrPrj] = useCreateCurrProjMutation();
     const [loginMsg, setLoginMsg] = useState("");
 
     function HandleLoginUser() {
@@ -24,7 +25,7 @@ export default function Login() {
 
 
     function HandleCreateUser() {
-        create({ email: userName, pwd: password }).then(() => { }).catch((error) => {
+        create({ email: userName, pwd: password }).then(() => {createCurrPrj({ email: userName })}).catch((error) => {
             console.log("HandleCreateUser error: " + error)
         })
     }
