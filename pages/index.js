@@ -4,6 +4,7 @@ import App from '../components/app';
 import { store } from '../redux/store';
 import { Provider } from 'react-redux';
 import React, { useState } from 'react';
+import Logout from '../components/logout';
 
 export default function Home() {
   const [darkTheme, setDarkTheme] = useState(true);
@@ -15,7 +16,7 @@ export default function Home() {
       </Head>
       <React.StrictMode>
         <Provider store={store}>
-          {/* <button className={styles.buttonDarkTheme} onClick={() => setDarkTheme(!darkTheme)}>Toggle Dark Theme</button> */}
+          <Logout />
           <main>
             <App/>
           </main>
