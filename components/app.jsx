@@ -1,30 +1,54 @@
 import styles from '../styles/Home.module.css';
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Project from './project';
 import Link from 'next/link'
-import { useGetProjectsQuery, useGetTasksQueueQuery, useDeleteTasksMutation, useSetCurrProjMutation } from '../redux/apiSlice';
+import { useGetProjectsMutation, useGetTasksQueueMutation, useDeleteTasksMutation, useSetCurrProjMutation } from '../redux/apiSlice';
 import Image from 'next/image';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateProjects } from '../redux/slice';
 
 export default function App() {
 
     const [toggleNewProject, setToggleNewProject] = useState(false);
+    const dispatch = useDispatch();
 
-    const projectsQuery = useGetProjectsQuery();
-    const queueQuery = useGetTasksQueueQuery();
-    const [deleteTasks, response_delete] = useDeleteTasksMutation()
-    const [setCurrProj, response_currProj] = useSetCurrProjMutation()
+    const [getProjects, projectsQuery] = useGetProjectsMutation();
+    const [getTasksQueue, queueQuery] = useGetTasksQueueMutation();
+    const [deleteTasks, response_delete] = useDeleteTasksMutation();
+    const [setCurrProj, response_currProj] = useSetCurrProjMutation();
+
+    const { updatePrj } = useSelector((state) => state.project);
 
     const projectBoxStyles = [styles.projectBoxYellow, styles.projectBoxRed, styles.projectBoxGreen, styles.projectBoxBlue, styles.projectBoxPink, styles.projectBoxOrange];
 
+    useEffect(() => {
+        HandleGetProjects();
+        HandleGetQueue();
+    }, [updatePrj]);
+
+    function HandleGetProjects() {
+        getProjects({ email: localStorage.getItem("userEmail") }).then(() => { }).catch((error) => {
+            console.log("HandleGetProjects error: " + error)
+        })
+    }
+
+    function HandleGetQueue() {
+        getTasksQueue({ email: localStorage.getItem("userEmail") }).then(() => { }).catch((error) => {
+            console.log("HandleGetQueue error: " + error)
+        })
+    }
+
+
     const HandleCheckTask = function () {
-        let taskData = { "projectId": queueQuery.data[0].proj_id, "taskId": queueQuery.data[0]._id, "projQtty": projectsQuery?.data.length }
+        let taskData = { "projectId": queueQuery.data[0].proj_id, "taskId": queueQuery.data[0]._id, "projQtty": projectsQuery?.data.length, "email": localStorage.getItem("userEmail") }
         deleteTasks(taskData)
             .unwrap()
             .then(() => {
+                dispatch(updateProjects(!updatePrj))
                 if (queueQuery.data.length === 0) {
                     console.log("Resetting current project counter");
-                    let currProjData = { "num": 0 }
+                    let currProjData = { num: 0, email: localStorage.getItem("userEmail") }
                     setCurrProj(currProjData).then(() => { }).catch((error) => {
                         console.log("HandleCheckTask.setCurrProj error: " + error)
                     })
@@ -41,13 +65,13 @@ export default function App() {
     return (
         <div>
             <div className={styles.mainTitleContainer}>
-            <Image
-                priority
-                src="/octodo_logo.png"
-                height={180}
-                width={458}
-                alt=""
-            />
+                <Image
+                    priority
+                    src="/octodo_logo.png"
+                    height={180}
+                    width={458}
+                    alt=""
+                />
             </div>
 
 
@@ -62,9 +86,9 @@ export default function App() {
             </p>
 
 
-            <div className={styles.currentTask}>
+            <div>
                 {(queueQuery.isSuccess && queueQuery.data.length) ?
-                    <div>
+                    <div className={styles.currentTask}>
                         <div><span className={styles.todo}>To Do:</span>{` ${queueQuery.data[0]?.name}`}<span className={styles.checkMarkBox} onClick={() => HandleCheckTask()}><span className={styles.checkMark}>✔️</span></span></div>
                     </div> :
                     <></>

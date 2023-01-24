@@ -2,8 +2,13 @@ import styles from '../styles/Home.module.css';
 import { useRenameTaskMutation, useDeleteTaskMutation } from '../redux/apiSlice';
 import { useState } from 'react';
 import Image from 'next/image';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateProjects } from '../redux/slice';
 
 export default function Task(props) {
+
+  const dispatch = useDispatch();
+  const { updatePrj } = useSelector((state) => state.project);
 
   const [renameTask, response_rename] = useRenameTaskMutation();
   const [deleteTask, response_delete] = useDeleteTaskMutation();
@@ -16,7 +21,7 @@ export default function Task(props) {
     let taskNameData = { "taskId": props.id, "name": rename }
     renameTask(taskNameData)
       .unwrap()
-      .then(() => { })
+      .then(() => {dispatch(updateProjects(!updatePrj))})
       .catch((error) => {
         console.log("HandleRenameTask error: " + error)
       })
@@ -27,7 +32,7 @@ export default function Task(props) {
     let taskDeleteData = { "projectId": props.projId, "taskId": props.id }
     deleteTask(taskDeleteData)
       .unwrap()
-      .then(() => { })
+      .then(() => {dispatch(updateProjects(!updatePrj))})
       .catch((error) => {
         console.log("HandleDeleteTask error: " + error)
       })

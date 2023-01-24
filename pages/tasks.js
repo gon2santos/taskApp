@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
-import Project from '../components/project';
 import { store } from '../redux/store';
 import { Provider } from 'react-redux';
 import React, { useState } from 'react';

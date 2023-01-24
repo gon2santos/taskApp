@@ -1,55 +1,74 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { useGetProjectsQuery, useCreateTaskMutation } from '../redux/apiSlice';
+import { useGetProjectsMutation, useCreateTaskMutation } from '../redux/apiSlice';
 import Task from './task';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateProjects } from '../redux/slice';
 
 export default function TaskInput(props) {
 
-    const [createTask, response] = useCreateTaskMutation();
+  const [createTask, response] = useCreateTaskMutation();
 
-    const HandleCreateTask = (e) => {
-        e.preventDefault();
-        let taskData = { "name": taskDetail, "projectId": props.id };
-        createTask(taskData)
-            .unwrap()
-            .then(() => { })
-            .catch((error) => {
-                console.log("HandleCreateTask error: " + error)
-            })
-        setTaskDetail("");
-    }
+  const { updatePrj } = useSelector((state) => state.project);
 
-    const [taskDetail, setTaskDetail] = useState("");
+  const dispatch = useDispatch();
 
-    const { data, error, isLoading } = useGetProjectsQuery();
+  const HandleCreateTask = (e) => {
+    e.preventDefault();
+    let taskData = { "name": taskDetail, "projectId": props.id };
+    createTask(taskData)
+      .unwrap()
+      .then(() => dispatch(updateProjects(!updatePrj)))
+      .catch((error) => {
+        console.log("HandleCreateTask error: " + error)
+      })
+    setTaskDetail("");
+  }
 
-    let proj = data?.find(p => p._id === props.id);
+  const [taskDetail, setTaskDetail] = useState("");
+
+  const [getProjects, projectsQuery] = useGetProjectsMutation();
+
+  function HandleGetProjects() {
+    getProjects({ email: localStorage.getItem("userEmail") }).then(() => { }).catch((error) => {
+      console.log("HandleGetProjects error: " + error)
+    })
+  }
+
+  useEffect(() => {
+    HandleGetProjects();
+  }, [updatePrj]);
+
+  var proj = {};
+
+  proj = projectsQuery?.data?.find(p => p._id === props.id);
 
 
-    return (
-        <div >
-            <Head>
-                <title>New Task</title>
-                <link rel="icon" href="/favicon.ico" />
-            </Head>
+  return (
+    <div >
+      <Head>
+        <title>New Task</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
 
-            <h1 className={styles.title}>
-            {proj?.name}
-            </h1>
-            
-            <ol>
-                {proj?.tasks.map(element => {
-                  return (<span key={element._id}><li><Task name={element.name} id={element._id} projId={props.id}/></li></span>)})}
-            </ol>
-            <form onSubmit={(e) => HandleCreateTask(e)}>
-                <div className={styles.newTaskInput}><label htmlFor="taskDetail"><span>New task: </span></label><input autoFocus className={styles.inputBox} name='taskDetail' value={taskDetail} placeholder='...' onChange={(e) => setTaskDetail(e.target.value)} /></div>
-            </form>
+      <h1 className={styles.title}>
+        {proj?.name}
+      </h1>
 
-            <Link className={styles.link} href="/"><h1 >&larr; Back</h1></Link>
+      <ol>
+        {proj?.tasks.map(element => {
+          return (<span key={element._id}><li><Task name={element.name} id={element._id} projId={props.id} /></li></span>)
+        })}
+      </ol>
+      <form onSubmit={(e) => HandleCreateTask(e)}>
+        <div className={styles.newTaskInput}><label htmlFor="taskDetail"><span>New task: </span></label><input autoFocus className={styles.inputBox} name='taskDetail' value={taskDetail} placeholder='...' onChange={(e) => setTaskDetail(e.target.value)} /></div>
+      </form>
 
-            <style jsx>{`
+      <Link className={styles.link} href="/"><h1 >&larr; Back</h1></Link>
+
+      <style jsx>{`
         main {
           padding: 5rem 0;
           flex: 1;
@@ -86,7 +105,7 @@ export default function TaskInput(props) {
         }
       `}</style>
 
-            <style jsx global>{`
+      <style jsx global>{`
         html,
         body {
           padding: 0;
@@ -99,6 +118,6 @@ export default function TaskInput(props) {
           box-sizing: border-box;
         }
       `}</style>
-        </div>
-    )
+    </div>
+  )
 }

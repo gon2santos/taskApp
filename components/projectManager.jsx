@@ -1,12 +1,13 @@
 import styles from '../styles/Home.module.css';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteProject, renameProject } from '../redux/slice';
+import { updateProjects } from '../redux/slice';
 import { useRouter } from 'next/router'
 import { useDeleteProjectMutation, useRenameProjectMutation } from '../redux/apiSlice';
 
 export default function ProjectManager(props) {
     const dispatch = useDispatch();
+    const { updatePrj } = useSelector((state) => state.project);
     const [rename, setRename] = useState("")
     const router = useRouter()
     const [deleteProject, response_delete] = useDeleteProjectMutation()
@@ -16,7 +17,7 @@ export default function ProjectManager(props) {
         let projectData = { "projectId": props.id }
         deleteProject(projectData)
             .unwrap()
-            .then(() => { })
+            .then(() => {dispatch(updateProjects(!updatePrj))})
             .catch((error) => {
                 console.log("HandleDeleteProject error: " + error)
             })
@@ -27,7 +28,7 @@ export default function ProjectManager(props) {
         let projectData = { "projectId": props.id, "name": rename }
         renameProject(projectData)
             .unwrap()
-            .then(() => { })
+            .then(() => {dispatch(updateProjects(!updatePrj))})
             .catch((error) => {
                 console.log("HandleRenameProject error: " + error)
             })

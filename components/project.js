@@ -2,18 +2,24 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.css';
 import { useState } from 'react';
 import { useCreateProjectMutation } from '../redux/apiSlice';
+import { updateProjects } from '../redux/slice';
+import { useDispatch, useSelector } from 'react-redux';
 
 export default function Project(props) {
+
+  const dispatch = useDispatch();
+
+  const { updatePrj } = useSelector((state) => state.project);
 
   const [projectName, setProjectName] = useState('');
   const [createProject, response] = useCreateProjectMutation();
 
   const HandleCreateProject = (e) => {
     e.preventDefault()
-    let projectData = { "name": projectName };
+    let projectData = { "name": projectName, "email": localStorage.getItem("userEmail") };
     createProject(projectData)
             .unwrap()
-            .then(() => { })
+            .then(() => {dispatch(updateProjects(!updatePrj))})
             .catch((error) => {
                 console.log("HandleCreateProject error: " + error)
             })

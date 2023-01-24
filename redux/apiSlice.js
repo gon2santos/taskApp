@@ -6,20 +6,42 @@ export const apiSlice = createApi({
   // The cache reducer expects to be added at `state.api` (already default - this is optional)
   reducerPath: 'api',
   // All of our requests will have URLs starting with 'http://127.0.0.1:5000'
-  baseQuery: fetchBaseQuery({ baseUrl: 'https://task-app-backend-sable.vercel.app' }),
+  baseQuery: fetchBaseQuery({ 
+    baseUrl: 'https://task-app-backend-sable.vercel.app',
+    prepareHeaders: (headers, { getState }) => {
+      // By default, if we have a token in the store, let's use that for authenticated requests
+      const token = localStorage.getItem("accessToken");
+      if (token) {
+        headers.set("authorization", `Bearer ${token}`);
+      }
+      return headers;
+    } 
+  }), /*https://task-app-backend-sable.vercel.app*/
   tagTypes: ['Projects', 'Tasks'],
   // The "endpoints" represent operations and requests for this server
   endpoints: builder => ({
     // The `getPosts` endpoint is a "query" operation that returns data
-    getProjects: builder.query({
-      // The URL for the request is 'http://127.0.0.1:5000/projects/all'
-      query: () => '/projects/all',
-      providesTags: ['Projects']
+    getProjects: builder.mutation({
+      query: (payload) => ({
+        url: '/projects/all',
+        method: 'POST',
+        body: payload,
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+      }),
+      /* providesTags: ['Projects'], */
     }),
-    getTasksQueue: builder.query({
-      // The URL for the request is 'http://127.0.0.1:5000/queue/'
-      query: () => '/queue/',
-      providesTags: ['Tasks']
+    getTasksQueue: builder.mutation({
+      query: (payload) => ({
+        url: '/queue/',
+        method: 'POST',
+        body: payload,
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+      }),
+      /* providesTags: ['Tasks'], */
     }),
     deleteTasks: builder.mutation({
       query: (payload) => ({
@@ -30,7 +52,7 @@ export const apiSlice = createApi({
           'Content-type': 'application/json; charset=UTF-8',
         },
       }),
-      invalidatesTags: ['Projects','Tasks'],
+      /* invalidatesTags: ['Projects','Tasks'], */
     }),
     createTask: builder.mutation({
       query: (payload) => ({
@@ -41,7 +63,7 @@ export const apiSlice = createApi({
           'Content-type': 'application/json; charset=UTF-8',
         },
       }),
-      invalidatesTags: ['Projects','Tasks'],
+      /* invalidatesTags: ['Projects','Tasks'], */
     }),
     createProject: builder.mutation({
       query: (payload) => ({
@@ -52,7 +74,7 @@ export const apiSlice = createApi({
           'Content-type': 'application/json; charset=UTF-8',
         },
       }),
-      invalidatesTags: ['Projects','Tasks'],
+      /* invalidatesTags: ['Projects','Tasks'], */
     }),
     deleteProject: builder.mutation({
       query: (payload) => ({
@@ -63,7 +85,7 @@ export const apiSlice = createApi({
           'Content-type': 'application/json; charset=UTF-8',
         },
       }),
-      invalidatesTags: ['Projects','Tasks'],
+      /* invalidatesTags: ['Projects','Tasks'], */
     }),
     renameProject: builder.mutation({
       query: (payload) => ({
@@ -74,7 +96,7 @@ export const apiSlice = createApi({
           'Content-type': 'application/json; charset=UTF-8',
         },
       }),
-      invalidatesTags: ['Projects'/* ,'Tasks' */],
+      /* invalidatesTags: ['Projects'], */
     }),
     setCurrProj: builder.mutation({
       query: (payload) => ({
@@ -85,7 +107,7 @@ export const apiSlice = createApi({
           'Content-type': 'application/json; charset=UTF-8',
         },
       }),
-      invalidatesTags: ['Projects' ,'Tasks' ],
+      /* invalidatesTags: ['Projects' ,'Tasks' ], */
     }),
     renameTask: builder.mutation({
       query: (payload) => ({
@@ -96,7 +118,7 @@ export const apiSlice = createApi({
           'Content-type': 'application/json; charset=UTF-8',
         },
       }),
-      invalidatesTags: ['Projects' ,'Tasks' ],
+      /* invalidatesTags: ['Projects' ,'Tasks' ], */
     }),
     deleteTask: builder.mutation({
       query: (payload) => ({
@@ -107,10 +129,34 @@ export const apiSlice = createApi({
           'Content-type': 'application/json; charset=UTF-8',
         },
       }),
-      invalidatesTags: ['Projects' ,'Tasks' ],
+      /* invalidatesTags: ['Projects' ,'Tasks' ], */
+    }),
+    loginUser: builder.mutation({
+      query: (payload) => ({
+        url: '/users/login/',
+        method: 'POST',
+        body: payload,
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+      }),
+      /* invalidatesTags: ['Projects' ,'Tasks' ], */
+    }),
+    createUser: builder.mutation({
+      query: (payload) => ({
+        url: '/users/create/',
+        method: 'POST',
+        body: payload,
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+      }),
+      /* invalidatesTags: ['Projects' ,'Tasks' ], */
     }),
   })
 })
 
 // Export the auto-generated hook for the `getPosts` query endpoint
-export const { useGetProjectsQuery, useGetTasksQueueQuery, useDeleteTasksMutation, useCreateTaskMutation, useCreateProjectMutation, useDeleteProjectMutation, useRenameProjectMutation, useSetCurrProjMutation, useRenameTaskMutation, useDeleteTaskMutation } = apiSlice
+export const { useGetProjectsMutation, useGetTasksQueueMutation, useDeleteTasksMutation, useCreateTaskMutation, 
+              useCreateProjectMutation, useDeleteProjectMutation, useRenameProjectMutation, useSetCurrProjMutation, 
+              useRenameTaskMutation, useDeleteTaskMutation, useLoginUserMutation, useCreateUserMutation } = apiSlice

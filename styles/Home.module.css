@@ -9,6 +9,14 @@
   background-color: rgb(218, 218, 218);
 }
 
+.logout{
+  font-size: larger;
+  cursor: pointer;
+  color: black;
+  margin-right: 1rem;
+}
+
+
 .containerDark {
   min-height: 100vh;
   padding: 0 0.5rem;
@@ -60,20 +68,25 @@
   filter:invert(60%);
 }
 
+.logoutButton{
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0);
+  filter:invert(100%);
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 1rem;
+  right: 2rem;
+}
+
+.logoutButton:hover{
+  filter:invert(60%);
+}
+
 .projectName {
   display: flex;
   flex-direction: row;
   background-color: #1b1279;
-  border-radius: 10px;
-  padding-left: 1rem;
-  margin-top: 1rem;
-  justify-content: space-between;
-}
-
-.username {
-  display: flex;
-  flex-direction: row;
-  background-color: #79125e;
   border-radius: 10px;
   padding-left: 1rem;
   margin-top: 1rem;
@@ -99,7 +112,7 @@
   color: #dadada;
   padding-left: 1rem;
   padding-right: 1rem;
-  width: 8rem;
+  width: fit-content;
   cursor: pointer;
 }
 
@@ -110,13 +123,23 @@
 .newTaskInput {
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  align-items: center;
   background-color: #5c771db5;
   border-radius: 10px;
-  padding: 0rem 0rem 0rem 1rem;
+  padding-left: 1rem;
   font-size: 2rem;
   margin-top: 2rem;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.username {
+  display: flex;
+  flex-direction: row;
+  background-color: #79125e;
+  border-radius: 10px;
+  padding-left: 1rem;
+  margin-top: 1rem;
+  justify-content: space-between;
 }
 
 .inputBox {
@@ -500,4 +523,10 @@
   color:#353535;
   transition-duration: 200ms;
   background-color: hsl(37,82%,70%);
+}
+
+.createAccountButton{
+  cursor: pointer;
+  font-size: large;
+  margin-top: 2rem;
 }
