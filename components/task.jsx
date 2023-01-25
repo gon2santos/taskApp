@@ -18,7 +18,7 @@ export default function Task(props) {
 
   const HandleRenameTask = (e) => {
     e.preventDefault();
-    let taskNameData = { "taskId": props.id, "name": rename }
+    let taskNameData = { "taskId": props.id, "name": rename, "email": localStorage.getItem("userEmail") }
     renameTask(taskNameData)
       .unwrap()
       .then(() => {dispatch(updateProjects(!updatePrj))})
