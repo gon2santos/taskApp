@@ -3,20 +3,20 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import Project from './project';
 import Link from 'next/link'
-import { useGetProjectsMutation, useGetTasksQueueMutation, useDeleteTasksMutation, useSetCurrProjMutation } from '../redux/apiSlice';
+import { useGetProjectsMutation, useGetTasksQueueMutation, useCheckTaskMutation } from '../redux/apiSlice';
 import Image from 'next/image';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { updateProjects } from '../redux/slice';
 
 export default function App() {
 
-    const [toggleNewProject, setToggleNewProject] = useState(false);
     const dispatch = useDispatch();
+
+    const [toggleNewProject, setToggleNewProject] = useState(false);
 
     const [getProjects, projectsQuery] = useGetProjectsMutation();
     const [getTasksQueue, queueQuery] = useGetTasksQueueMutation();
-    const [deleteTasks, response_delete] = useDeleteTasksMutation();
-    const [setCurrProj, response_currProj] = useSetCurrProjMutation();
+    const [checkTask, response_check] = useCheckTaskMutation();
 
     const { updatePrj } = useSelector((state) => state.project);
 
@@ -42,17 +42,10 @@ export default function App() {
 
     const HandleCheckTask = function () {
         let taskData = { "projectId": queueQuery.data[0].proj_id, "taskId": queueQuery.data[0]._id, "projQtty": projectsQuery?.data.length, "email": localStorage.getItem("userEmail") }
-        deleteTasks(taskData)
+        checkTask(taskData)
             .unwrap()
             .then(() => {
                 dispatch(updateProjects(!updatePrj))
-                if (queueQuery.data.length === 0) {
-                    console.log("Resetting current project counter");
-                    let currProjData = { num: 0, email: localStorage.getItem("userEmail") }
-                    setCurrProj(currProjData).then(() => { }).catch((error) => {
-                        console.log("HandleCheckTask.setCurrProj error: " + error)
-                    })
-                }
             })
             .catch((error) => {
                 console.log("HandleCheckTask error: " + error)

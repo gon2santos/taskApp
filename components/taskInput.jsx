@@ -2,7 +2,7 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.css';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { useGetProjectsMutation, useCreateTaskMutation } from '../redux/apiSlice';
+import { useGetProjectsMutation, useCreateTaskMutation, useUpdateTasksQueueMutation } from '../redux/apiSlice';
 import Task from './task';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateProjects } from '../redux/slice';
@@ -10,6 +10,7 @@ import { updateProjects } from '../redux/slice';
 export default function TaskInput(props) {
 
   const [createTask, response] = useCreateTaskMutation();
+  const [updateQueue, response_updateQueue] = useUpdateTasksQueueMutation();
 
   const { updatePrj } = useSelector((state) => state.project);
 
@@ -20,6 +21,9 @@ export default function TaskInput(props) {
     let taskData = { "name": taskDetail, "projectId": props.id };
     createTask(taskData)
       .unwrap()
+      .then(() => {
+        updateQueue({"email": localStorage.getItem("userEmail")})
+    })
       .then(() => dispatch(updateProjects(!updatePrj)))
       .catch((error) => {
         console.log("HandleCreateTask error: " + error)

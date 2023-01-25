@@ -7,7 +7,7 @@ export const apiSlice = createApi({
   reducerPath: 'api',
   // All of our requests will have URLs starting with 'http://127.0.0.1:5000'
   baseQuery: fetchBaseQuery({ 
-    baseUrl: 'https://task-app-backend-sable.vercel.app',
+    baseUrl: 'http://127.0.0.1:5000',
     prepareHeaders: (headers, { getState }) => {
       // By default, if we have a token in the store, let's use that for authenticated requests
       const token = localStorage.getItem("accessToken");
@@ -35,6 +35,17 @@ export const apiSlice = createApi({
     getTasksQueue: builder.mutation({
       query: (payload) => ({
         url: '/queue/',
+        method: 'PUT',
+        body: payload,
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+      }),
+      /* providesTags: ['Tasks'], */
+    }),
+    updateTasksQueue: builder.mutation({
+      query: (payload) => ({
+        url: '/queue/',
         method: 'POST',
         body: payload,
         headers: {
@@ -43,7 +54,7 @@ export const apiSlice = createApi({
       }),
       /* providesTags: ['Tasks'], */
     }),
-    deleteTasks: builder.mutation({
+    checkTask: builder.mutation({
       query: (payload) => ({
         url: '/tasks/check/',
         method: 'DELETE',
@@ -168,6 +179,7 @@ export const apiSlice = createApi({
 })
 
 // Export the auto-generated hook for the `getPosts` query endpoint
-export const { useGetProjectsMutation, useGetTasksQueueMutation, useDeleteTasksMutation, useCreateTaskMutation, 
+export const { useGetProjectsMutation, useGetTasksQueueMutation, useCheckTaskMutation, useCreateTaskMutation, 
               useCreateProjectMutation, useDeleteProjectMutation, useRenameProjectMutation, useSetCurrProjMutation, 
-              useRenameTaskMutation, useDeleteTaskMutation, useLoginUserMutation, useCreateUserMutation, useCreateCurrProjMutation } = apiSlice
+              useRenameTaskMutation, useDeleteTaskMutation, useLoginUserMutation, useCreateUserMutation, 
+              useCreateCurrProjMutation, useUpdateTasksQueueMutation } = apiSlice

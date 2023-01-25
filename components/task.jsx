@@ -29,7 +29,7 @@ export default function Task(props) {
   }
 
   const HandleDeleteTask = () => {
-    let taskDeleteData = { "projectId": props.projId, "taskId": props.id }
+    let taskDeleteData = { "projectId": props.projId, "taskId": props.id, "email": localStorage.getItem("userEmail") }
     deleteTask(taskDeleteData)
       .unwrap()
       .then(() => {dispatch(updateProjects(!updatePrj))})
