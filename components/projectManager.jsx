@@ -14,21 +14,24 @@ export default function ProjectManager(props) {
     const [renameProject, response_rename] = useRenameProjectMutation()
 
     const HandleDeleteProject = () => {
-        let projectData = { "projectId": props.id }
+        let projectData = { "projectId": props.id, "email": localStorage.getItem("userEmail") }
         deleteProject(projectData)
             .unwrap()
-            .then(() => {dispatch(updateProjects(!updatePrj))})
+            .then(() => {
+                dispatch(updateProjects(!updatePrj));
+                alert("Project deleted");
+                router.push('/');
+            })
             .catch((error) => {
                 console.log("HandleDeleteProject error: " + error)
             })
-        router.push('/');
     }
 
     const HandleRenameProject = (e) => {
         let projectData = { "projectId": props.id, "name": rename }
         renameProject(projectData)
             .unwrap()
-            .then(() => {dispatch(updateProjects(!updatePrj))})
+            /* .then(() => {dispatch(updateProjects(!updatePrj))}) */
             .catch((error) => {
                 console.log("HandleRenameProject error: " + error)
             })
@@ -36,9 +39,9 @@ export default function ProjectManager(props) {
     }
 
     return (
-            <div className={styles.projMan}>
-                <div><label htmlFor='rename'>Rename Project: </label> <input className={styles.projManRenameInput} name='rename' value={rename} onChange={(e) => setRename(e.target.value)} /> <button onClick={(e) => HandleRenameProject(e)}>Done</button></div>
-                <button className={styles.deleteButton} onClick={() => HandleDeleteProject()}>Delete project</button>
-            </div>
+        <div className={styles.projMan}>
+            <div><label htmlFor='rename'>Rename Project: </label> <input className={styles.projManRenameInput} name='rename' value={rename} onChange={(e) => setRename(e.target.value)} /> <button onClick={(e) => HandleRenameProject(e)}>Done</button></div>
+            <button className={styles.deleteButton} onClick={() => HandleDeleteProject()}>Delete project</button>
+        </div>
     )
 }
