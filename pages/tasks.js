@@ -2,7 +2,7 @@ import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 import { store } from '../redux/store';
 import { Provider } from 'react-redux';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import TaskInput from '../components/taskInput';
 import ProjectManager from '../components/projectManager';
 import { useRouter } from 'next/router'
@@ -13,6 +13,14 @@ export default function Tasks() {
 
   const [showProjMan, setShowProjMan] = useState(false);
   const [rotOptBtn, setRotOptBtn] = useState(false);
+
+
+  useEffect(() => {
+    if (!localStorage.getItem("accessToken"))
+      router.push('/login');
+    else if (!localStorage.getItem("userEmail"))
+      router.push('/login');
+  }, []);
 
   return (
     <div className={styles.containerDark}>

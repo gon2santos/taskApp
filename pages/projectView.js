@@ -3,9 +3,21 @@ import styles from '../styles/Home.module.css';
 import Project from '../components/project';
 import { store } from '../redux/store';
 import { Provider } from 'react-redux';
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useRouter } from 'next/router'
 
 export default function Home() {
+
+  const router = useRouter()
+
+
+  useEffect(() => {
+    if (!localStorage.getItem("accessToken"))
+      router.push('/login');
+    else if (!localStorage.getItem("userEmail"))
+      router.push('/login');
+  }, []);
+
   return (
     <div className={styles.containerDark}>
       <Head>
