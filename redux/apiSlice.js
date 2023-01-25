@@ -7,7 +7,7 @@ export const apiSlice = createApi({
   reducerPath: 'api',
   // All of our requests will have URLs starting with 'http://127.0.0.1:5000'
   baseQuery: fetchBaseQuery({ 
-    baseUrl: 'http://127.0.0.1:5000',
+    baseUrl: 'https://task-app-backend-sable.vercel.app',
     prepareHeaders: (headers, { getState }) => {
       // By default, if we have a token in the store, let's use that for authenticated requests
       const token = localStorage.getItem("accessToken");
