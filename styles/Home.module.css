@@ -354,50 +354,6 @@
   cursor: pointer;
 }
 
-.checkMarkBox {
-  cursor: pointer;
-  margin-left: 10px;
-  background-color: #00684c;
-  border-radius: 10px;
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
-  transition-duration: 200ms;
-  display: inline-block;
-  width: fit-content;
-  height: fit-content;
-}
-
-.checkMarkBox:hover {
-  transition-duration: 200ms;
-  background-color: #91b016;
-}
-
-.checkMark {
-  transition-duration: 200ms;
-  display: inline-block;
-  position: relative;
-  width: 60px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-
-.checkMark:hover {
-  transition-duration: 200ms;
-  transform: rotateZ(20deg);
-}
-
-.currentTask {
-  line-height: 1.15;
-  font-size: 2rem;
-  text-align: center;
-  background-color: #6e5c009b;
-  border-radius: 10px;
-  width: fit-content;
-  margin-left: auto;
-  margin-right: auto;
-  box-shadow: 0px 0px 10px 5px rgb(34, 34, 34);
-}
-
 .projectsSeparator{
   border-top: solid white 1px;
   text-align: center;
@@ -406,15 +362,6 @@
   margin-top: 3rem;
   padding-top: 1.5rem;
   font-size:x-large;
-}
-
-.todo{
-  position: relative;
-  background-color: #00000022;
-  border-radius: 10px;
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-  padding: 0.45rem;
 }
 
 .projectBoxYellow {
@@ -529,4 +476,82 @@
   cursor: pointer;
   font-size: large;
   margin-top: 2rem;
+}
+
+/* =================================================== CURRENT TASK STYLES =====================================================*/
+
+.currentTask {
+  line-height: 1.15;
+  text-align: center;
+  background-color: #6e5c009b;
+  border-radius: 10px;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0px 0px 10px 5px rgb(34, 34, 34);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.taskTitle{
+  margin: 0.3rem 1rem 0.5rem 1rem;
+  font-size: 2rem;
+}
+
+.taskBody{
+  margin: 0rem 0rem 0.7rem 1rem;
+  font-size: 1.3rem;
+  text-align: left;
+  max-width: 30rem;
+}
+
+.todo{
+  font-size: 1.7rem;
+  font-weight: bold;
+  position: relative;
+  background-color: #00000022;
+  border-radius: 10px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  padding-left: 0.4rem;
+  padding-right: 0.4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.checkMarkBox {
+  cursor: pointer;
+  margin-left: 10px;
+  background-color: #00684c;
+  border-radius: 10px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  transition-duration: 200ms;
+  /* display: inline-block; */
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 1.7rem;
+}
+
+.checkMarkBox:hover {
+  transition-duration: 200ms;
+  background-color: #91b016;
+}
+
+.checkMark {
+  transition-duration: 200ms;
+  display: inline-block;
+  position: relative;
+  width: 60px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.checkMark:hover {
+  transition-duration: 200ms;
+  transform: rotateZ(20deg);
 }

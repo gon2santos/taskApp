@@ -54,6 +54,15 @@ export default function App() {
 
     var i = 0/* Math.floor(Math.random() * projectBoxStyles.length) */
 
+    var taskArr;
+    var taskTitle;
+    var taskBody;
+    if(queueQuery.isSuccess){
+        taskArr = queueQuery.data[0]?.name?.split(' ');
+        taskTitle = `${taskArr[0]} ${taskArr[1]} ${taskArr[2]} ${taskArr[3]} ${taskArr[4]}`;
+        taskBody = queueQuery.data[0]?.name?.substring(taskTitle.length);
+    }
+
 
     return (
         <div>
@@ -82,7 +91,9 @@ export default function App() {
             <div>
                 {(queueQuery.isSuccess && queueQuery.data.length) ?
                     <div className={styles.currentTask}>
-                        <div><span className={styles.todo}>To Do:</span>{` ${queueQuery.data[0]?.name}`}<span className={styles.checkMarkBox} onClick={() => HandleCheckTask()}><span className={styles.checkMark}>✔️</span></span></div>
+                        <div className={styles.todo}><span>To Do:</span></div>
+                        <div><div className={styles.taskTitle}>{taskTitle}</div><div className={styles.taskBody}>{taskBody}</div></div>
+                        <div className={styles.checkMarkBox} onClick={() => HandleCheckTask()}><div className={styles.checkMark}>✔️</div></div>
                     </div> :
                     <></>
                 }
