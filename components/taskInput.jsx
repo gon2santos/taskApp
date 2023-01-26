@@ -22,8 +22,8 @@ export default function TaskInput(props) {
     createTask(taskData)
       .unwrap()
       .then(() => {
-        updateQueue({"email": localStorage.getItem("userEmail")})
-    })
+        updateQueue({ "email": localStorage.getItem("userEmail") })
+      })
       .then(() => dispatch(updateProjects(!updatePrj)))
       .catch((error) => {
         console.log("HandleCreateTask error: " + error)
@@ -61,11 +61,15 @@ export default function TaskInput(props) {
         {proj?.name}
       </h1>
 
-      <ol>
-        {proj?.tasks.map(element => {
-          return (<span key={element._id}><li><Task name={element.name} id={element._id} projId={props.id} /></li></span>)
-        })}
-      </ol>
+      <div >
+        <ol className={styles.tasksList}>
+          {proj?.tasks.map(element => {
+            return (<span key={element._id}><div><Task name={element.name} id={element._id} projId={props.id} /></div></span>)
+          })}
+        </ol>
+      </div>
+
+
       <form onSubmit={(e) => HandleCreateTask(e)}>
         <div className={styles.newTaskInput}><label htmlFor="taskDetail"><span>New task: </span></label><input autoFocus className={styles.inputBox} name='taskDetail' value={taskDetail} placeholder='...' onChange={(e) => setTaskDetail(e.target.value)} /></div>
       </form>

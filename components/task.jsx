@@ -46,7 +46,7 @@ export default function Task(props) {
             <input className={styles.taskRenameInput} autoFocus name='taskName' value={rename} placeholder={props.name} onChange={(e) => setRename(e.target.value)} />
           </form>
           : <span>{props.name}</span>}
-          <div>
+          <div className={styles.taskButtonsContainer}>
         <button className={styles.taskButtons} onClick={() => setToggleRenameInput(!toggleRenameInput)}><Image
           priority
           src="/editButton.svg"

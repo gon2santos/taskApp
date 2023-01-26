@@ -39,13 +39,14 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  font-size: x-large;
+  font-size: larger;
   margin-top: 1rem;
   margin-bottom: 1rem;
   color: rgb(218, 218, 218);
   background-color: #5a5a5a49;
   padding: 0.3rem 0.5rem 0.3rem 0.5rem;
   border-radius: 10px;
+  max-width: 50rem;
 }
 
 .taskRenameInput{
@@ -66,6 +67,11 @@
 
 .taskButtons:hover{
   filter:invert(60%);
+}
+
+.taskButtonsContainer{
+  display: flex;
+  flex-direction: row;
 }
 
 .logoutButton{
@@ -554,4 +560,12 @@
 .checkMark:hover {
   transition-duration: 200ms;
   transform: rotateZ(20deg);
+}
+
+.tasksList{
+  height: 270px;
+  overflow: hidden;
+  overflow-y: auto;
+  margin-right: 2rem;
+  padding-right: 1rem;
 }
