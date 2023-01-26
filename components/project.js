@@ -34,8 +34,13 @@ export default function Project(props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <form onSubmit={(e) => HandleCreateProject(e)}>
-        <div className={styles.projectName}><label htmlFor="projectName"><h1>Project name:</h1></label><input autoFocus className={styles.inputBox} name='projectName' value={projectName} placeholder='...' onChange={(e) => setProjectName(e.target.value)} /></div>
+        <div className={styles.newProjectContainer}>
+          <label htmlFor="projectName" className={styles.newProjectLabel}>Project name:</label>
+          <input autoFocus className={styles.newProjectInputBox} name='projectName' value={projectName} placeholder='...' onChange={(e) => setProjectName(e.target.value)} />
+        </div>
       </form>
+
+
       <style jsx>{`
         main {
           padding: 5rem 0;

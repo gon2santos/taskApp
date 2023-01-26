@@ -67,8 +67,8 @@ export default function Login() {
             </div>
 
 
-            <div className={styles.username}><label htmlFor="userName"><h2>User:</h2></label><input autoFocus className={styles.inputBox} name='userName' value={userName} placeholder='email address' onChange={(e) => setUserName(e.target.value)} /></div>
-            <div className={styles.password}><label htmlFor="password"><h2>Password:</h2></label><input type='password' className={styles.inputBox} name='password' value={password} placeholder='*************' onChange={(e) => setPassword(e.target.value)} /></div>
+            <div className={styles.username}><label htmlFor="userName"><h2>User:</h2></label><input autoFocus className={styles.loginInputBox} name='userName' value={userName} placeholder='email address' onChange={(e) => setUserName(e.target.value)} /></div>
+            <div className={styles.password}><label htmlFor="password"><h2>Password:</h2></label><input type='password' className={styles.loginInputBox} name='password' value={password} placeholder='*************' onChange={(e) => setPassword(e.target.value)} /></div>
 
             <button className={styles.loginButton} onClick={() => toggleCreate ? HandleCreateUser() : HandleLoginUser()}>{!toggleCreate ? <h2>Login</h2> : <h2>Create Account</h2>}</button>
 

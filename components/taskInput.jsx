@@ -71,7 +71,10 @@ export default function TaskInput(props) {
 
 
       <form onSubmit={(e) => HandleCreateTask(e)}>
-        <div className={styles.newTaskInput}><label htmlFor="taskDetail"><span>New task: </span></label><input autoFocus className={styles.inputBox} name='taskDetail' value={taskDetail} placeholder='...' onChange={(e) => setTaskDetail(e.target.value)} /></div>
+        <div className={styles.newTaskContainer}>
+          <label htmlFor="taskDetail" className={styles.newTaskLabel}>New task:</label>
+          <input autoFocus className={styles.newTaskInputBox} name='taskDetail' value={taskDetail} placeholder='...' onChange={(e) => setTaskDetail(e.target.value)} />
+        </div>
       </form>
 
       <Link className={styles.link} href="/"><h1 >&larr; Back</h1></Link>
