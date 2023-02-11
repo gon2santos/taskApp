@@ -67,7 +67,7 @@ export default function App() {
 
 
     return (
-        <div>
+        <div className={styles.test}>
             <div className={styles.mainTitleContainer}>
                 <Image
                     priority

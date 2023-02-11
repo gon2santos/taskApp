@@ -56,28 +56,30 @@ export default function TaskInput(props) {
         <title>New Task</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <div className={styles.bodTasks}>
+        <h1 className={styles.title}>
+          {proj?.name}
+        </h1>
 
-      <h1 className={styles.title}>
-        {proj?.name}
-      </h1>
-
-      <div >
-        <ol className={styles.tasksList}>
-          {proj?.tasks.map(element => {
-            return (<span key={element._id}><div><Task name={element.name} id={element._id} projId={props.id} /></div></span>)
-          })}
-        </ol>
-      </div>
-
-
-      <form onSubmit={(e) => HandleCreateTask(e)}>
-        <div className={styles.newTaskContainer}>
-          <label htmlFor="taskDetail" className={styles.newTaskLabel}>New task:</label>
-          <input autoFocus className={styles.newTaskInputBox} name='taskDetail' value={taskDetail} placeholder='...' onChange={(e) => setTaskDetail(e.target.value)} />
+        <div >
+          <ol className={styles.tasksList}>
+            {proj?.tasks.map(element => {
+              return (<span key={element._id}><div><Task name={element.name} id={element._id} projId={props.id} /></div></span>)
+            })}
+          </ol>
         </div>
-      </form>
 
-      <Link className={styles.link} href="/"><h1 >&larr; Back</h1></Link>
+
+        <form onSubmit={(e) => HandleCreateTask(e)}>
+          <div className={styles.newTaskContainer}>
+            <label htmlFor="taskDetail" className={styles.newTaskLabel}>New task:</label>
+            <input autoFocus className={styles.newTaskInputBox} name='taskDetail' value={taskDetail} placeholder='...' onChange={(e) => setTaskDetail(e.target.value)} />
+          </div>
+        </form>
+
+
+        <Link className={styles.link} href="/"><h1 >&larr; Back</h1></Link>
+      </div>
 
       <style jsx>{`
         main {

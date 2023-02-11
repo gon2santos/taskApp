@@ -18,11 +18,11 @@ export default function Project(props) {
     e.preventDefault()
     let projectData = { "name": projectName, "email": localStorage.getItem("userEmail") };
     createProject(projectData)
-            .unwrap()
-            .then(() => {dispatch(updateProjects(!updatePrj))})
-            .catch((error) => {
-                console.log("HandleCreateProject error: " + error)
-            })
+      .unwrap()
+      .then(() => { dispatch(updateProjects(!updatePrj)) })
+      .catch((error) => {
+        console.log("HandleCreateProject error: " + error)
+      })
     props.toggleFunction(false);
   }
 
