@@ -9,7 +9,7 @@
   background-color: rgb(218, 218, 218);
 }
 
-.logout{
+.logout {
   font-size: larger;
   cursor: pointer;
   color: black;
@@ -28,7 +28,7 @@
   color: rgb(218, 218, 218);
 }
 
-.buttonDarkTheme{
+.buttonDarkTheme {
   align-self: flex-end;
   justify-self: flex-start;
   margin: 2rem;
@@ -49,7 +49,7 @@
   max-width: 50rem;
 }
 
-.taskRenameInput{
+.taskRenameInput {
   background-color: #00684c00;
   border: none;
   outline: none;
@@ -58,26 +58,26 @@
   width: 160%;
 }
 
-.taskButtons{
+.taskButtons {
   cursor: pointer;
   background-color: rgba(255, 255, 255, 0);
-  filter:invert(100%);
+  filter: invert(100%);
   border: none;
 }
 
-.taskButtons:hover{
-  filter:invert(60%);
+.taskButtons:hover {
+  filter: invert(60%);
 }
 
-.taskButtonsContainer{
+.taskButtonsContainer {
   display: flex;
   flex-direction: row;
 }
 
-.logoutButton{
+.logoutButton {
   cursor: pointer;
   background-color: rgba(255, 255, 255, 0);
-  filter:invert(100%);
+  filter: invert(100%);
   display: flex;
   align-items: center;
   position: absolute;
@@ -85,8 +85,8 @@
   right: 2rem;
 }
 
-.logoutButton:hover{
-  filter:invert(60%);
+.logoutButton:hover {
+  filter: invert(60%);
 }
 
 .password {
@@ -139,20 +139,20 @@
 
 .link {
   cursor: pointer;
-  color:cornflowerblue;
+  color: cornflowerblue;
   text-decoration: none;
   width: fit-content;
 }
 
 .link:hover {
-  color:rgb(129, 129, 129);
+  color: rgb(129, 129, 129);
   transition-duration: 500ms;
 }
 
 .linkProject {
   border: solid 2px rgb(218, 218, 218);
   cursor: pointer;
-  color:rgb(218, 218, 218);
+  color: rgb(218, 218, 218);
   margin-left: 0.7rem;
   border-radius: 5px;
   font-size: 1.7rem;
@@ -162,12 +162,12 @@
 
 .linkProject:hover {
   transform: translate(0px, 4px);
-  color:rgb(129, 129, 129);
+  color: rgb(129, 129, 129);
   transition-duration: 200ms;
 }
 
 .projectBox:hover {
-  color:darkgoldenrod;
+  color: darkgoldenrod;
   transition-duration: 300ms;
 }
 
@@ -177,12 +177,12 @@
   font-size: 3.6rem;
 }
 
-.mainTitleContainer{
+.mainTitleContainer {
   display: flex;
   flex-direction: row;
   justify-content: center;
   margin-bottom: 3rem;
-} 
+}
 
 .title {
   text-align: center;
@@ -240,7 +240,7 @@
 }
 
 .logo {
-  align-self:flex-end;
+  align-self: flex-end;
   height: 1.2em;
   filter: invert(80%);
 }
@@ -252,41 +252,42 @@
   }
 }
 
-.footerName{
+.footerName {
   text-shadow: 0px 0px 15px rgb(0, 0, 0);
   transition-duration: 200ms;
 }
 
-.footerName:hover{
+.footerName:hover {
   font-size: larger;
   transition-duration: 200ms;
 }
 
-.projManSelection{
+.projManSelection {
   position: absolute;
   top: 5%;
   left: 3%;
 }
 
-.projManSelectionButton{
+.projManSelectionButton {
   cursor: pointer;
   transition-duration: 200ms;
   filter: invert(80%);
 }
 
-.projManSelectionButton:hover{
-  filter: invert(50%);;
+.projManSelectionButton:hover {
+  filter: invert(50%);
+  ;
   transition-duration: 200ms;
 }
 
-.projManSelectionButtonSelected{
+.projManSelectionButtonSelected {
   cursor: pointer;
   transform: rotate(90deg);
   transition-duration: 200ms;
   filter: invert(80%);
 }
 
-.projMan{
+.projMan {
   position: absolute;
   transform: translate(60px, -80px);
   display: flex;
@@ -299,7 +300,7 @@
   top: 100px;
 }
 
-.projManRenameInput{
+.projManRenameInput {
   /* background-color: #a4a4a4; */
   border: none;
   border-radius: 5px;
@@ -323,20 +324,20 @@
   cursor: pointer;
 }
 
-.renameProjContainer{
+.renameProjContainer {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
 }
 
-.projectsSeparator{
+.projectsSeparator {
   border-top: solid white 1px;
   text-align: center;
   width: 100%;
   display: inline-block;
   margin-top: 3rem;
   padding-top: 1.5rem;
-  font-size:x-large;
+  font-size: x-large;
 }
 
 .projectBoxYellow {
@@ -346,17 +347,18 @@
   padding: 2px 10px 7px 10px;
   margin: 10px;
   border-radius: 5px;
-  font-size:1.7rem;
+  font-size: 1.7rem;
   text-decoration: none;
   color: rgb(229, 229, 229);
 }
 
-.projectBoxYellow:hover{
+.projectBoxYellow:hover {
   transform: translate(0px, 4px);
-  color:#353535;
+  color: #353535;
   transition-duration: 200ms;
   background-color: hsl(61, 73%, 70%);
 }
+
 .projectBoxRed {
   transition-duration: 200ms;
   cursor: pointer;
@@ -364,17 +366,18 @@
   padding: 2px 10px 7px 10px;
   margin: 10px;
   border-radius: 5px;
-  font-size:1.7rem;
+  font-size: 1.7rem;
   text-decoration: none;
   color: rgb(229, 229, 229);
 }
 
 .projectBoxRed:hover {
   transform: translate(0px, 4px);
-  color:#353535;
+  color: #353535;
   transition-duration: 200ms;
   background-color: hsl(1, 78%, 70%);
 }
+
 .projectBoxGreen {
   transition-duration: 200ms;
   cursor: pointer;
@@ -382,17 +385,18 @@
   padding: 2px 10px 7px 10px;
   margin: 10px;
   border-radius: 5px;
-  font-size:1.7rem;
+  font-size: 1.7rem;
   text-decoration: none;
   color: rgb(229, 229, 229);
 }
 
-.projectBoxGreen:hover{
+.projectBoxGreen:hover {
   transform: translate(0px, 4px);
-  color:#353535;
+  color: #353535;
   transition-duration: 200ms;
   background-color: hsl(108, 84%, 70%);
 }
+
 .projectBoxBlue {
   transition-duration: 200ms;
   cursor: pointer;
@@ -400,54 +404,58 @@
   padding: 2px 10px 7px 10px;
   margin: 10px;
   border-radius: 5px;
-  font-size:1.7rem;
+  font-size: 1.7rem;
   text-decoration: none;
   color: rgb(229, 229, 229);
 }
 
-.projectBoxBlue:hover{
+.projectBoxBlue:hover {
   transform: translate(0px, 4px);
-  color:#353535;
+  color: #353535;
   transition-duration: 200ms;
   background-color: hsl(220, 78%, 70%);
 }
+
 .projectBoxPink {
   transition-duration: 200ms;
   cursor: pointer;
-  background-color: hsl(317,78%,40%);;
+  background-color: hsl(317, 78%, 40%);
+  ;
   padding: 2px 10px 7px 10px;
   margin: 10px;
   border-radius: 5px;
-  font-size:1.7rem;
+  font-size: 1.7rem;
   text-decoration: none;
   color: rgb(229, 229, 229);
 }
 
-.projectBoxPink:hover{
+.projectBoxPink:hover {
   transform: translate(0px, 4px);
-  color:#353535;
+  color: #353535;
   transition-duration: 200ms;
-  background-color: hsl(317,78%,70%);
+  background-color: hsl(317, 78%, 70%);
 }
+
 .projectBoxOrange {
   transition-duration: 200ms;
   cursor: pointer;
-  background-color: hsl(37,82%,40%);
+  background-color: hsl(37, 82%, 40%);
   padding: 2px 10px 7px 10px;
   margin: 10px;
   border-radius: 5px;
-  font-size:1.7rem;
+  font-size: 1.7rem;
   text-decoration: none;
   color: rgb(229, 229, 229);
 }
-.projectBoxOrange:hover{
+
+.projectBoxOrange:hover {
   transform: translate(0px, 4px);
-  color:#353535;
+  color: #353535;
   transition-duration: 200ms;
-  background-color: hsl(37,82%,70%);
+  background-color: hsl(37, 82%, 70%);
 }
 
-.createAccountButton{
+.createAccountButton {
   cursor: pointer;
   font-size: large;
   margin-top: 2rem;
@@ -469,19 +477,19 @@
   justify-content: space-between;
 }
 
-.taskTitle{
+.taskTitle {
   margin: 0.3rem 1rem 0.5rem 1rem;
   font-size: 2rem;
 }
 
-.taskBody{
+.taskBody {
   margin: 0rem 0rem 0.7rem 1rem;
   font-size: 1.3rem;
   text-align: left;
   max-width: 30rem;
 }
 
-.todo{
+.todo {
   font-size: 1.7rem;
   font-weight: bold;
   position: relative;
@@ -533,7 +541,7 @@
 
 /* =================================================== TASKS LIST STYLES =====================================================*/
 
-.tasksList{
+.tasksList {
   height: 270px;
   overflow: hidden;
   overflow-y: auto;
@@ -557,7 +565,7 @@
   margin: auto;
 }
 
-.newTaskLabel{
+.newTaskLabel {
   width: 20%;
   text-align: center;
   min-width: 150px;
@@ -579,7 +587,7 @@
   width: 80%;
 }
 
-.newTaskInputBox:focus{
+.newTaskInputBox:focus {
   outline: none;
 }
 
@@ -601,7 +609,7 @@
   margin-top: 1rem;
 }
 
-.newProjectLabel{
+.newProjectLabel {
   width: 20%;
   text-align: center;
   min-width: 180px;
@@ -623,13 +631,13 @@
   width: 80%;
 }
 
-.newProjectInputBox:focus{
+.newProjectInputBox:focus {
   outline: none;
 }
 
 /* ================================================= LOGIN STYLES =============================================== */
 
-.loginInputBox{
+.loginInputBox {
   margin-left: 1rem;
   padding-left: 1rem;
   padding-right: 1rem;
@@ -643,4 +651,43 @@
   background-color: #00000049;
   color: #ffffff;
   width: 80%;
+}
+
+.logoStyle {
+  width: 458;
+  height: 180;
+}
+
+
+@media screen and (max-width: 600px) {
+  .logoStyle {
+    width: 229;
+    height: 90;
+  }
+
+  .taskTitle {
+    margin: 0.3rem 1rem 0.5rem 1rem;
+    font-size: 1.5rem;
+  }
+
+  .taskBody {
+    margin: 0rem 0rem 0.7rem 1rem;
+    font-size: 17px;
+    text-align: left;
+    max-width: 30rem;
+  }
+
+  .currentTask {
+    line-height: 1.15;
+    text-align: center;
+    background-color: #6e5c009b;
+    border-radius: 10px;
+    width: fit-content;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    box-shadow: 0px 0px 10px 5px rgb(34, 34, 34);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
 }

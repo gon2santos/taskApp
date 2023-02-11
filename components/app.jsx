@@ -57,11 +57,13 @@ export default function App() {
     var taskArr;
     var taskTitle;
     var taskBody;
-    if(queueQuery.isSuccess){
+    if (queueQuery.isSuccess) {
         taskArr = queueQuery.data[0]?.name?.split(' ');
-        taskTitle = `${taskArr[0]} ${taskArr[1]} ${taskArr[2]} ${taskArr[3]} ${taskArr[4]}`;
-        taskBody = queueQuery.data[0]?.name?.substring(taskTitle.length);
+        taskTitle = `${taskArr[0] ? taskArr[0] : ""} ${taskArr[1] ? taskArr[1] : ""} ${taskArr[2] ? taskArr[2] : ""} ${taskArr[3] ? taskArr[3] : ""} ${taskArr[4] ? taskArr[4] : ""}`;
+        taskBody = queueQuery.data[0]?.name?.substring(taskTitle.length) ? queueQuery.data[0]?.name?.substring(taskTitle.length) : "";
     }
+
+    const size = useWindowSize();
 
 
     return (
@@ -70,8 +72,8 @@ export default function App() {
                 <Image
                     priority
                     src="/octodo_logo.png"
-                    height={180}
-                    width={458}
+                    width={size.width < 600 ? 328 : 458}
+                    height={size.width < 600 ? 129 : 180}
                     alt=""
                 />
             </div>
@@ -117,4 +119,35 @@ export default function App() {
 
         </div>
     )
+}
+
+function useWindowSize() {
+    // Initialize state with undefined width/height so server and client renders match
+    // Learn more here: https://joshwcomeau.com/react/the-perils-of-rehydration/
+    const [windowSize, setWindowSize] = useState({
+        width: undefined,
+        height: undefined,
+    });
+
+    useEffect(() => {
+        // only execute all the code below in client side
+        // Handler to call on window resize
+        function handleResize() {
+            // Set window width/height to state
+            setWindowSize({
+                width: window.innerWidth,
+                height: window.innerHeight,
+            });
+        }
+
+        // Add event listener
+        window.addEventListener("resize", handleResize);
+
+        // Call handler right away so state gets updated with initial window size
+        handleResize();
+
+        // Remove event listener on cleanup
+        return () => window.removeEventListener("resize", handleResize);
+    }, []); // Empty array ensures that effect is only run on mount
+    return windowSize;
 }
